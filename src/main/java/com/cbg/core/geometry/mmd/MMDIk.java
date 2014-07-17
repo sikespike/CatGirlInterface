@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 import java.util.List;
 

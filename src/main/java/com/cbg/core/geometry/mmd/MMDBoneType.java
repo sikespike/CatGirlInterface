@@ -1,4 +1,4 @@
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 public enum MMDBoneType {
     NORMAL(0),CENTER(1),IK(4),CO_ROTATE(9);

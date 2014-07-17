@@ -2,28 +2,31 @@ package com.cbg.core.data;
 
 import java.util.List;
 
-import com.cbg.core.geometry.MMDBone;
-import com.cbg.core.geometry.MMDDisplayBone;
-import com.cbg.core.geometry.MMDIk;
-import com.cbg.core.geometry.MMDRigidBody;
-import com.cbg.core.geometry.Material;
 import com.cbg.core.geometry.Triangle;
 import com.cbg.core.geometry.Vertex;
+import com.cbg.core.geometry.mmd.MMDBone;
+import com.cbg.core.geometry.mmd.MMDDisplayBone;
+import com.cbg.core.geometry.mmd.MMDIk;
+import com.cbg.core.geometry.mmd.MMDJoint;
+import com.cbg.core.geometry.mmd.MMDMaterial;
+import com.cbg.core.geometry.mmd.MMDRigidBody;
+import com.cbg.core.geometry.mmd.MMDVertexMorph;
 
 public class MMDModel {
     private String fileVersion;
     private float versionNumber;
     private String modelName;
     private String modelComment;
-    private List<Vertex> verticies;
-    private List<Triangle> triangles;
-    private List<Material> materials;
-    private List<MMDBone> bones;
+    private List<Vertex> vertexList;
+    private List<Triangle> triangleList;
+    private List<MMDMaterial> materialList;
+    private List<MMDBone> boneList;
     private List<MMDIk> ikList;
-    private List<String> boneGroupNames;
+    private List<MMDVertexMorph> vertexMorphList;
     private List<MMDDisplayBone> displayBoneList;
-    private List<String> toonTextures;
+    private List<String> toonTextureList;
     private List<MMDRigidBody> rigidBodyList;
+    private List<MMDJoint> jointList;
     /**
      * @return the fileVersion
      */
@@ -73,52 +76,52 @@ public class MMDModel {
         this.modelComment = modelComment;
     }
     /**
-     * @return the verticies
+     * @return the vertexList
      */
-    public List<Vertex> getVerticies() {
-        return verticies;
+    public List<Vertex> getVertexList() {
+        return vertexList;
     }
     /**
-     * @param verticies the verticies to set
+     * @param vertexList the vertexList to set
      */
-    public void setVerticies(List<Vertex> verticies) {
-        this.verticies = verticies;
+    public void setVertexList(List<Vertex> vertexList) {
+        this.vertexList = vertexList;
     }
     /**
-     * @return the triangles
+     * @return the triangleList
      */
-    public List<Triangle> getTriangles() {
-        return triangles;
+    public List<Triangle> getTriangleList() {
+        return triangleList;
     }
     /**
-     * @param triangles the triangles to set
+     * @param triangleList the triangleList to set
      */
-    public void setTriangles(List<Triangle> triangles) {
-        this.triangles = triangles;
+    public void setTriangleList(List<Triangle> triangleList) {
+        this.triangleList = triangleList;
     }
     /**
-     * @return the materials
+     * @return the materialList
      */
-    public List<Material> getMaterials() {
-        return materials;
+    public List<MMDMaterial> getMaterialList() {
+        return materialList;
     }
     /**
-     * @param materials the materials to set
+     * @param materialList the materialList to set
      */
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
+    public void setMaterialList(List<MMDMaterial> materialList) {
+        this.materialList = materialList;
     }
     /**
-     * @return the bones
+     * @return the boneList
      */
-    public List<MMDBone> getBones() {
-        return bones;
+    public List<MMDBone> getBoneList() {
+        return boneList;
     }
     /**
-     * @param bones the bones to set
+     * @param boneList the boneList to set
      */
-    public void setBones(List<MMDBone> bones) {
-        this.bones = bones;
+    public void setBoneList(List<MMDBone> boneList) {
+        this.boneList = boneList;
     }
     /**
      * @return the ikList
@@ -133,16 +136,16 @@ public class MMDModel {
         this.ikList = ikList;
     }
     /**
-     * @return the boneGroupNames
+     * @return the vertexMorphList
      */
-    public List<String> getBoneGroupNames() {
-        return boneGroupNames;
+    public List<MMDVertexMorph> getVertexMorphList() {
+        return vertexMorphList;
     }
     /**
-     * @param boneGroupNames the boneGroupNames to set
+     * @param vertexMorphList the vertexMorphList to set
      */
-    public void setBoneGroupNames(List<String> boneGroupNames) {
-        this.boneGroupNames = boneGroupNames;
+    public void setVertexMorphList(List<MMDVertexMorph> vertexMorphList) {
+        this.vertexMorphList = vertexMorphList;
     }
     /**
      * @return the displayBoneList
@@ -157,16 +160,16 @@ public class MMDModel {
         this.displayBoneList = displayBoneList;
     }
     /**
-     * @return the toonTextures
+     * @return the toonTextureList
      */
-    public List<String> getToonTextures() {
-        return toonTextures;
+    public List<String> getToonTextureList() {
+        return toonTextureList;
     }
     /**
-     * @param toonTextures the toonTextures to set
+     * @param toonTextureList the toonTextureList to set
      */
-    public void setToonTextures(List<String> toonTextures) {
-        this.toonTextures = toonTextures;
+    public void setToonTextureList(List<String> toonTextureList) {
+        this.toonTextureList = toonTextureList;
     }
     /**
      * @return the rigidBodyList
@@ -179,5 +182,17 @@ public class MMDModel {
      */
     public void setRigidBodyList(List<MMDRigidBody> rigidBodyList) {
         this.rigidBodyList = rigidBodyList;
+    }
+    /**
+     * @return the jointList
+     */
+    public List<MMDJoint> getJointList() {
+        return jointList;
+    }
+    /**
+     * @param jointList the jointList to set
+     */
+    public void setJointList(List<MMDJoint> jointList) {
+        this.jointList = jointList;
     }
 }

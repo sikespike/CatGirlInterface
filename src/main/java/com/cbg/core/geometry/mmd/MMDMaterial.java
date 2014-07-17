@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 /**
  * @author Siebe
  *
  */
-public class Material {
+public class MMDMaterial {
     private float r;
     private float g;
     private float b;

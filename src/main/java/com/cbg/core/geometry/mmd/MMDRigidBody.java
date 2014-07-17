@@ -1,4 +1,4 @@
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 public class MMDRigidBody {
     private String name;
