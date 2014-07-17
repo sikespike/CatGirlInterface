@@ -1,26 +1,26 @@
 /**
  * 
  */
-package com.cbg;
+package com.cbg.core.map;
 
 /**
  * @author Siebe
  *
  */
-public class Point {
+public class UVPoint{
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     
     /**
      * 
      */
-    public Point() {
+    public UVPoint() {
         this.x=0;
         this.y=0;
     }
 
-    public Point(int x, int y){
+    public UVPoint(double x, double y){
         this.x=x;
         this.y=y;
     }
@@ -28,28 +28,30 @@ public class Point {
     /**
      * @return the x
      */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
     /**
      * @param x the x to set
      */
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
     /**
      * @return the y
      */
-    public int getY() {
+    public double getY() {
         return y;
     }
 
     /**
      * @param y the y to set
      */
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
+    
+    
 }

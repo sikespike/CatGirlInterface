@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cbg;
+package com.cbg.core.map;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

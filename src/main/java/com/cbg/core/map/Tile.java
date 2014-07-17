@@ -1,4 +1,4 @@
-package com.cbg;
+package com.cbg.core.map;
 
 import java.util.ArrayList;
 import java.util.List;

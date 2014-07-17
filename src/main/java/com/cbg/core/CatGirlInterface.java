@@ -1,4 +1,6 @@
-package com.cbg;
+package com.cbg.core;
+
+import com.cbg.core.map.MapConverter;
 
 /**
  * 
