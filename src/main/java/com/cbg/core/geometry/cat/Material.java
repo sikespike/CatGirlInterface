@@ -1,0 +1,72 @@
+package com.cbg.core.geometry.cat;
+
+import com.cbg.core.geometry.Vector;
+
+public class Material {
+
+    private Vector color;
+    private Vector specLight;
+    private Vector ambientLight;
+
+    private String texture;
+
+    /**
+     * @return the color
+     */
+    public Vector getColor() {
+        return color;
+    }
+
+    /**
+     * @param color
+     *            the color to set
+     */
+    public void setColor(Vector color) {
+        this.color = color;
+    }
+
+    /**
+     * @return the specLight
+     */
+    public Vector getSpecLight() {
+        return specLight;
+    }
+
+    /**
+     * @param specLight
+     *            the specLight to set
+     */
+    public void setSpecLight(Vector specLight) {
+        this.specLight = specLight;
+    }
+
+    /**
+     * @return the ambientLight
+     */
+    public Vector getAmbientLight() {
+        return ambientLight;
+    }
+
+    /**
+     * @param ambientLight
+     *            the ambientLight to set
+     */
+    public void setAmbientLight(Vector ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
+    /**
+     * @return the texture
+     */
+    public String getTexture() {
+        return texture;
+    }
+
+    /**
+     * @param texture
+     *            the texture to set
+     */
+    public void setTexture(String texture) {
+        this.texture = texture;
+    }
+}

@@ -32,6 +32,7 @@ public abstract class MMDPolygon {
         if(this.verticies == null){
             this.verticies = new ArrayList<MMDVertex>();
         }
+        v.setPoly(this);
         this.verticies.add(v);
     }
 }

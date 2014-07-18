@@ -24,6 +24,11 @@ public class MMDVertex {
     
     private int bone0Weight;
     private int edgeFlag;
+    
+    private MMDBone bone0;
+    private MMDBone bone1;
+    
+    private MMDPolygon poly;
     /**
      * @return the x
      */
@@ -167,5 +172,41 @@ public class MMDVertex {
      */
     public void setEdgeFlag(int edgeFlag) {
         this.edgeFlag = edgeFlag;
+    }
+    /**
+     * @return the bone0
+     */
+    public MMDBone getBone0() {
+        return bone0;
+    }
+    /**
+     * @param bone0 the bone0 to set
+     */
+    public void setBone0(MMDBone bone0) {
+        this.bone0 = bone0;
+    }
+    /**
+     * @return the bone1
+     */
+    public MMDBone getBone1() {
+        return bone1;
+    }
+    /**
+     * @param bone1 the bone1 to set
+     */
+    public void setBone1(MMDBone bone1) {
+        this.bone1 = bone1;
+    }
+    /**
+     * @return the poly
+     */
+    public MMDPolygon getPoly() {
+        return poly;
+    }
+    /**
+     * @param poly the poly to set
+     */
+    public void setPoly(MMDPolygon poly) {
+        this.poly = poly;
     }
 }
