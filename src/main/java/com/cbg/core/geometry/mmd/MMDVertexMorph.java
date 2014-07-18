@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class MMDVertexMorph {
     private String name;
-    private Long type;
+    private int type;
     private List<MMDMorphData> morphData;
     /**
      * @return the name
@@ -28,13 +28,13 @@ public class MMDVertexMorph {
     /**
      * @return the type
      */
-    public Long getType() {
+    public int getType() {
         return type;
     }
     /**
      * @param type the type to set
      */
-    public void setType(Long type) {
+    public void setType(int type) {
         this.type = type;
     }
     /**

@@ -22,10 +22,10 @@ public class MMDMaterial {
     private float ga;
     private float ba;
     
-    private int toonNumber;
+    private int toonIndex;
     private int edgeFlag;
-    private Long indexAffectedCount;
-    private char[] textureFilename = new char[20];
+    private long indexAffectedCount;
+    private String textureFilename;
     /**
      * @return the r
      */
@@ -159,16 +159,16 @@ public class MMDMaterial {
         this.ba = ba;
     }
     /**
-     * @return the toonNumber
+     * @return the toonIndex
      */
-    public int getToonNumber() {
-        return toonNumber;
+    public int getToonIndex() {
+        return toonIndex;
     }
     /**
-     * @param toonNumber the toonNumber to set
+     * @param toonIndex the toonIndex to set
      */
-    public void setToonNumber(int toonNumber) {
-        this.toonNumber = toonNumber;
+    public void setToonIndex(int toonIndex) {
+        this.toonIndex = toonIndex;
     }
     /**
      * @return the edgeFlag
@@ -185,25 +185,25 @@ public class MMDMaterial {
     /**
      * @return the indexAffectedCount
      */
-    public Long getIndexAffectedCount() {
+    public long getIndexAffectedCount() {
         return indexAffectedCount;
     }
     /**
      * @param indexAffectedCount the indexAffectedCount to set
      */
-    public void setIndexAffectedCount(Long indexAffectedCount) {
+    public void setIndexAffectedCount(long indexAffectedCount) {
         this.indexAffectedCount = indexAffectedCount;
     }
     /**
      * @return the textureFilename
      */
-    public char[] getTextureFilename() {
+    public String getTextureFilename() {
         return textureFilename;
     }
     /**
      * @param textureFilename the textureFilename to set
      */
-    public void setTextureFilename(char[] textureFilename) {
+    public void setTextureFilename(String textureFilename) {
         this.textureFilename = textureFilename;
     }
 }

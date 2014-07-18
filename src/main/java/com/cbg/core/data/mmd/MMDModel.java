@@ -1,102 +1,65 @@
-package com.cbg.core.data;
+package com.cbg.core.data.mmd;
 
 import java.util.List;
+import java.util.Map;
 
-import com.cbg.core.geometry.Triangle;
-import com.cbg.core.geometry.Vertex;
 import com.cbg.core.geometry.mmd.MMDBone;
-import com.cbg.core.geometry.mmd.MMDDisplayBone;
 import com.cbg.core.geometry.mmd.MMDIk;
 import com.cbg.core.geometry.mmd.MMDJoint;
 import com.cbg.core.geometry.mmd.MMDMaterial;
 import com.cbg.core.geometry.mmd.MMDRigidBody;
+import com.cbg.core.geometry.mmd.MMDTriangle;
+import com.cbg.core.geometry.mmd.MMDVertex;
 import com.cbg.core.geometry.mmd.MMDVertexMorph;
 
 public class MMDModel {
-    private String fileVersion;
-    private float versionNumber;
-    private String modelName;
-    private String modelComment;
-    private List<Vertex> vertexList;
-    private List<Triangle> triangleList;
+    private MMDHeader header;
+    private List<MMDVertex> vertexList;
+    private List<MMDTriangle> triangleList;
     private List<MMDMaterial> materialList;
     private List<MMDBone> boneList;
     private List<MMDIk> ikList;
     private List<MMDVertexMorph> vertexMorphList;
-    private List<MMDDisplayBone> displayBoneList;
+    private List<MMDVertexMorph> facialMorphList;
+    private Map<String, List<MMDBone>> displayBoneGroups;
     private List<String> toonTextureList;
     private List<MMDRigidBody> rigidBodyList;
     private List<MMDJoint> jointList;
+    
     /**
-     * @return the fileVersion
+     * @return the header
      */
-    public String getFileVersion() {
-        return fileVersion;
+    public MMDHeader getHeader() {
+        return header;
     }
     /**
-     * @param fileVersion the fileVersion to set
+     * @param header the header to set
      */
-    public void setFileVersion(String fileVersion) {
-        this.fileVersion = fileVersion;
-    }
-    /**
-     * @return the versionNumber
-     */
-    public float getVersionNumber() {
-        return versionNumber;
-    }
-    /**
-     * @param versionNumber the versionNumber to set
-     */
-    public void setVersionNumber(float versionNumber) {
-        this.versionNumber = versionNumber;
-    }
-    /**
-     * @return the modelName
-     */
-    public String getModelName() {
-        return modelName;
-    }
-    /**
-     * @param modelName the modelName to set
-     */
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-    /**
-     * @return the modelComment
-     */
-    public String getModelComment() {
-        return modelComment;
-    }
-    /**
-     * @param modelComment the modelComment to set
-     */
-    public void setModelComment(String modelComment) {
-        this.modelComment = modelComment;
+    public void setHeader(MMDHeader header) {
+        this.header = header;
     }
     /**
      * @return the vertexList
      */
-    public List<Vertex> getVertexList() {
+    public List<MMDVertex> getVertexList() {
         return vertexList;
     }
     /**
      * @param vertexList the vertexList to set
      */
-    public void setVertexList(List<Vertex> vertexList) {
+    public void setVertexList(List<MMDVertex> vertexList) {
         this.vertexList = vertexList;
     }
     /**
      * @return the triangleList
      */
-    public List<Triangle> getTriangleList() {
+    public List<MMDTriangle> getTriangleList() {
         return triangleList;
     }
     /**
      * @param triangleList the triangleList to set
      */
-    public void setTriangleList(List<Triangle> triangleList) {
+    public void setTriangleList(List<MMDTriangle> triangleList) {
         this.triangleList = triangleList;
     }
     /**
@@ -148,16 +111,16 @@ public class MMDModel {
         this.vertexMorphList = vertexMorphList;
     }
     /**
-     * @return the displayBoneList
+     * @return the displayBoneGroups
      */
-    public List<MMDDisplayBone> getDisplayBoneList() {
-        return displayBoneList;
+    public Map<String, List<MMDBone>> getDisplayBoneGroups() {
+        return displayBoneGroups;
     }
     /**
-     * @param displayBoneList the displayBoneList to set
+     * @param displayBoneGroups the displayBoneGroups to set
      */
-    public void setDisplayBoneList(List<MMDDisplayBone> displayBoneList) {
-        this.displayBoneList = displayBoneList;
+    public void setDisplayBoneGroups(Map<String, List<MMDBone>> displayBoneGroups) {
+        this.displayBoneGroups = displayBoneGroups;
     }
     /**
      * @return the toonTextureList
@@ -194,5 +157,17 @@ public class MMDModel {
      */
     public void setJointList(List<MMDJoint> jointList) {
         this.jointList = jointList;
+    }
+    /**
+     * @return the facialMorphList
+     */
+    public List<MMDVertexMorph> getFacialMorphList() {
+        return facialMorphList;
+    }
+    /**
+     * @param facialMorphList the facialMorphList to set
+     */
+    public void setFacialMorphList(List<MMDVertexMorph> facialMorphList) {
+        this.facialMorphList = facialMorphList;
     }
 }

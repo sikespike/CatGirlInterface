@@ -1,35 +1,36 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * @author Siebe
  *
  */
-public abstract class Polygon {
-    protected List<Vertex> verticies;
+public abstract class MMDPolygon {
+    protected List<MMDVertex> verticies;
 
     /**
      * @return the verticies
      */
-    public List<Vertex> getVerticies() {
+    public List<MMDVertex> getVerticies() {
         return verticies;
     }
 
     /**
      * @param verticies the verticies to set
      */
-    public void setVerticies(List<Vertex> verticies) {
+    public void setVerticies(List<MMDVertex> verticies) {
         this.verticies = verticies;
     }
     
-    public void addVertex(Vertex v){
+    public void addVertex(MMDVertex v){
         if(this.verticies == null){
-            this.verticies = new ArrayList<Vertex>();
+            this.verticies = new ArrayList<MMDVertex>();
         }
         this.verticies.add(v);
     }

@@ -3,154 +3,187 @@
  */
 package com.cbg.core.geometry.mmd;
 
+import java.util.List;
+
 import com.cbg.core.geometry.Vector;
 
 /**
  * @author Siebe
- *
+ * 
  */
 public class MMDJoint {
     private String name;
-    private Long sourceRId;
-    private Long destRId;
-    private Vector location;
-    private Vector rotation;
-    private Vector minLoc;
-    private Vector maxLoc;
-    private Vector minRot;
-    private Vector maxRot;
-    private Vector springConst;
-    private Vector springRotConst;
+    private MMDRigidBody sourceRigidBody;
+    private MMDRigidBody destRigidBody;
+    private List<Vector> location;
+    private List<Vector> rotation;
+    private List<Vector> minLoc;
+    private List<Vector> maxLoc;
+    private List<Vector> minRot;
+    private List<Vector> maxRot;
+    private List<Vector> springConst;
+    private List<Vector> springRotConst;
+
     /**
      * @return the name
      */
     public String getName() {
         return name;
     }
+
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
+
     /**
-     * @return the sourceRId
+     * @return the sourceRigidBody
      */
-    public Long getSourceRId() {
-        return sourceRId;
+    public MMDRigidBody getSourceRigidBody() {
+        return sourceRigidBody;
     }
+
     /**
-     * @param sourceRId the sourceRId to set
+     * @param sourceRigidBody the sourceRigidBody to set
      */
-    public void setSourceRId(Long sourceRId) {
-        this.sourceRId = sourceRId;
+    public void setSourceRigidBody(MMDRigidBody sourceRigidBody) {
+        this.sourceRigidBody = sourceRigidBody;
     }
+
     /**
-     * @return the destRId
+     * @return the destRigidBody
      */
-    public Long getDestRId() {
-        return destRId;
+    public MMDRigidBody getDestRigidBody() {
+        return destRigidBody;
     }
+
     /**
-     * @param destRId the destRId to set
+     * @param destRigidBody the destRigidBody to set
      */
-    public void setDestRId(Long destRId) {
-        this.destRId = destRId;
+    public void setDestRigidBody(MMDRigidBody destRigidBody) {
+        this.destRigidBody = destRigidBody;
     }
+
     /**
      * @return the location
      */
-    public Vector getLocation() {
+    public List<Vector> getLocation() {
         return location;
     }
+
     /**
-     * @param location the location to set
+     * @param location
+     *            the location to set
      */
-    public void setLocation(Vector location) {
+    public void setLocation(List<Vector> location) {
         this.location = location;
     }
+
     /**
      * @return the rotation
      */
-    public Vector getRotation() {
+    public List<Vector> getRotation() {
         return rotation;
     }
+
     /**
-     * @param rotation the rotation to set
+     * @param rotation
+     *            the rotation to set
      */
-    public void setRotation(Vector rotation) {
+    public void setRotation(List<Vector> rotation) {
         this.rotation = rotation;
     }
+
     /**
      * @return the minLoc
      */
-    public Vector getMinLoc() {
+    public List<Vector> getMinLoc() {
         return minLoc;
     }
+
     /**
-     * @param minLoc the minLoc to set
+     * @param minLoc
+     *            the minLoc to set
      */
-    public void setMinLoc(Vector minLoc) {
+    public void setMinLoc(List<Vector> minLoc) {
         this.minLoc = minLoc;
     }
+
     /**
      * @return the maxLoc
      */
-    public Vector getMaxLoc() {
+    public List<Vector> getMaxLoc() {
         return maxLoc;
     }
+
     /**
-     * @param maxLoc the maxLoc to set
+     * @param maxLoc
+     *            the maxLoc to set
      */
-    public void setMaxLoc(Vector maxLoc) {
+    public void setMaxLoc(List<Vector> maxLoc) {
         this.maxLoc = maxLoc;
     }
+
     /**
      * @return the minRot
      */
-    public Vector getMinRot() {
+    public List<Vector> getMinRot() {
         return minRot;
     }
+
     /**
-     * @param minRot the minRot to set
+     * @param minRot
+     *            the minRot to set
      */
-    public void setMinRot(Vector minRot) {
+    public void setMinRot(List<Vector> minRot) {
         this.minRot = minRot;
     }
+
     /**
      * @return the maxRot
      */
-    public Vector getMaxRot() {
+    public List<Vector> getMaxRot() {
         return maxRot;
     }
+
     /**
-     * @param maxRot the maxRot to set
+     * @param maxRot
+     *            the maxRot to set
      */
-    public void setMaxRot(Vector maxRot) {
+    public void setMaxRot(List<Vector> maxRot) {
         this.maxRot = maxRot;
     }
+
     /**
      * @return the springConst
      */
-    public Vector getSpringConst() {
+    public List<Vector> getSpringConst() {
         return springConst;
     }
+
     /**
-     * @param springConst the springConst to set
+     * @param springConst
+     *            the springConst to set
      */
-    public void setSpringConst(Vector springConst) {
+    public void setSpringConst(List<Vector> springConst) {
         this.springConst = springConst;
     }
+
     /**
      * @return the springRotConst
      */
-    public Vector getSpringRotConst() {
+    public List<Vector> getSpringRotConst() {
         return springRotConst;
     }
+
     /**
-     * @param springRotConst the springRotConst to set
+     * @param springRotConst
+     *            the springRotConst to set
      */
-    public void setSpringRotConst(Vector springRotConst) {
+    public void setSpringRotConst(List<Vector> springRotConst) {
         this.springRotConst = springRotConst;
     }
 }

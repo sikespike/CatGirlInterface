@@ -1,30 +1,27 @@
 package com.cbg.core.geometry.mmd;
 
+import java.util.List;
+
+import com.cbg.core.geometry.Vector;
+
 public class MMDRigidBody {
     private String name;
-    private Long boneId;
-    private Long collisionGroupId;
-    private Long collisionMaskId;
-    private Long shape;
-    private float shapeWidth;
-    private float shapeHeight;
-    private float shapeDepth;
+    private MMDBone bone;
+    private int collisionGroupId;
+    private int collisionMaskId;
+    private int shape;
     
-    private float x;
-    private float y;
-    private float z;
-    
-    private float rx;
-    private float ry;
-    private float rz;
-    
+    private List<Vector> size;
+    private List<Vector> position;
+    private List<Vector> rotation;
+
     private float mass;
-    private float linearDampCoef;
-    private float angularDampCoef;
-    private float recoilCoef;
+    private float velocityAtt;
+    private float rotationAtt;
+    private float bounce;
     private float friction;
-    
-    private Long bodyType;
+
+    private int mode;
 
     /**
      * @return the name
@@ -34,192 +31,113 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return the boneId
+     * @return the bone
      */
-    public Long getBoneId() {
-        return boneId;
+    public MMDBone getBone() {
+        return bone;
     }
 
     /**
-     * @param boneId the boneId to set
+     * @param bone
+     *            the bone to set
      */
-    public void setBoneId(Long boneId) {
-        this.boneId = boneId;
+    public void setBone(MMDBone bone) {
+        this.bone = bone;
     }
 
     /**
      * @return the collisionGroupId
      */
-    public Long getCollisionGroupId() {
+    public int getCollisionGroupId() {
         return collisionGroupId;
     }
 
     /**
-     * @param collisionGroupId the collisionGroupId to set
+     * @param collisionGroupId
+     *            the collisionGroupId to set
      */
-    public void setCollisionGroupId(Long collisionGroupId) {
+    public void setCollisionGroupId(int collisionGroupId) {
         this.collisionGroupId = collisionGroupId;
     }
 
     /**
      * @return the collisionMaskId
      */
-    public Long getCollisionMaskId() {
+    public int getCollisionMaskId() {
         return collisionMaskId;
     }
 
     /**
-     * @param collisionMaskId the collisionMaskId to set
+     * @param collisionMaskId
+     *            the collisionMaskId to set
      */
-    public void setCollisionMaskId(Long collisionMaskId) {
+    public void setCollisionMaskId(int collisionMaskId) {
         this.collisionMaskId = collisionMaskId;
     }
 
     /**
      * @return the shape
      */
-    public Long getShape() {
+    public int getShape() {
         return shape;
     }
 
     /**
-     * @param shape the shape to set
+     * @param shape
+     *            the shape to set
      */
-    public void setShape(Long shape) {
+    public void setShape(int shape) {
         this.shape = shape;
     }
 
     /**
-     * @return the shapeWidth
+     * @return the size
      */
-    public float getShapeWidth() {
-        return shapeWidth;
+    public List<Vector> getSize() {
+        return size;
     }
 
     /**
-     * @param shapeWidth the shapeWidth to set
+     * @param size the size to set
      */
-    public void setShapeWidth(float shapeWidth) {
-        this.shapeWidth = shapeWidth;
+    public void setSize(List<Vector> size) {
+        this.size = size;
     }
 
     /**
-     * @return the shapeHeight
+     * @return the position
      */
-    public float getShapeHeight() {
-        return shapeHeight;
+    public List<Vector> getPosition() {
+        return position;
     }
 
     /**
-     * @param shapeHeight the shapeHeight to set
+     * @param position the position to set
      */
-    public void setShapeHeight(float shapeHeight) {
-        this.shapeHeight = shapeHeight;
+    public void setPosition(List<Vector> position) {
+        this.position = position;
     }
 
     /**
-     * @return the shapeDepth
+     * @return the rotation
      */
-    public float getShapeDepth() {
-        return shapeDepth;
+    public List<Vector> getRotation() {
+        return rotation;
     }
 
     /**
-     * @param shapeDepth the shapeDepth to set
+     * @param rotation the rotation to set
      */
-    public void setShapeDepth(float shapeDepth) {
-        this.shapeDepth = shapeDepth;
-    }
-
-    /**
-     * @return the x
-     */
-    public float getX() {
-        return x;
-    }
-
-    /**
-     * @param x the x to set
-     */
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    /**
-     * @return the y
-     */
-    public float getY() {
-        return y;
-    }
-
-    /**
-     * @param y the y to set
-     */
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    /**
-     * @return the z
-     */
-    public float getZ() {
-        return z;
-    }
-
-    /**
-     * @param z the z to set
-     */
-    public void setZ(float z) {
-        this.z = z;
-    }
-
-    /**
-     * @return the rx
-     */
-    public float getRx() {
-        return rx;
-    }
-
-    /**
-     * @param rx the rx to set
-     */
-    public void setRx(float rx) {
-        this.rx = rx;
-    }
-
-    /**
-     * @return the ry
-     */
-    public float getRy() {
-        return ry;
-    }
-
-    /**
-     * @param ry the ry to set
-     */
-    public void setRy(float ry) {
-        this.ry = ry;
-    }
-
-    /**
-     * @return the rz
-     */
-    public float getRz() {
-        return rz;
-    }
-
-    /**
-     * @param rz the rz to set
-     */
-    public void setRz(float rz) {
-        this.rz = rz;
+    public void setRotation(List<Vector> rotation) {
+        this.rotation = rotation;
     }
 
     /**
@@ -230,52 +148,53 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param mass the mass to set
+     * @param mass
+     *            the mass to set
      */
     public void setMass(float mass) {
         this.mass = mass;
     }
 
     /**
-     * @return the linearDampCoef
+     * @return the velocityAtt
      */
-    public float getLinearDampCoef() {
-        return linearDampCoef;
+    public float getVelocityAtt() {
+        return velocityAtt;
     }
 
     /**
-     * @param linearDampCoef the linearDampCoef to set
+     * @param velocityAtt the velocityAtt to set
      */
-    public void setLinearDampCoef(float linearDampCoef) {
-        this.linearDampCoef = linearDampCoef;
+    public void setVelocityAtt(float velocityAtt) {
+        this.velocityAtt = velocityAtt;
     }
 
     /**
-     * @return the angularDampCoef
+     * @return the rotationAtt
      */
-    public float getAngularDampCoef() {
-        return angularDampCoef;
+    public float getRotationAtt() {
+        return rotationAtt;
     }
 
     /**
-     * @param angularDampCoef the angularDampCoef to set
+     * @param rotationAtt the rotationAtt to set
      */
-    public void setAngularDampCoef(float angularDampCoef) {
-        this.angularDampCoef = angularDampCoef;
+    public void setRotationAtt(float rotationAtt) {
+        this.rotationAtt = rotationAtt;
     }
 
     /**
-     * @return the recoilCoef
+     * @return the bounce
      */
-    public float getRecoilCoef() {
-        return recoilCoef;
+    public float getBounce() {
+        return bounce;
     }
 
     /**
-     * @param recoilCoef the recoilCoef to set
+     * @param bounce the bounce to set
      */
-    public void setRecoilCoef(float recoilCoef) {
-        this.recoilCoef = recoilCoef;
+    public void setBounce(float bounce) {
+        this.bounce = bounce;
     }
 
     /**
@@ -286,23 +205,24 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param friction the friction to set
+     * @param friction
+     *            the friction to set
      */
     public void setFriction(float friction) {
         this.friction = friction;
     }
 
     /**
-     * @return the bodyType
+     * @return the mode
      */
-    public Long getBodyType() {
-        return bodyType;
+    public int getMode() {
+        return mode;
     }
 
     /**
-     * @param bodyType the bodyType to set
+     * @param mode the mode to set
      */
-    public void setBodyType(Long bodyType) {
-        this.bodyType = bodyType;
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }

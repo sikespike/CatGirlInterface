@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 /**
  * @author Siebe
  *
  */
-public class Vertex {
+public class MMDVertex {
     private float x;
     private float y;
     private float z;
@@ -23,7 +23,7 @@ public class Vertex {
     private int bone1Index;
     
     private int bone0Weight;
-    private char edgeFlag;
+    private int edgeFlag;
     /**
      * @return the x
      */
@@ -159,13 +159,13 @@ public class Vertex {
     /**
      * @return the edgeFlag
      */
-    public char getEdgeFlag() {
+    public int getEdgeFlag() {
         return edgeFlag;
     }
     /**
      * @param edgeFlag the edgeFlag to set
      */
-    public void setEdgeFlag(char edgeFlag) {
+    public void setEdgeFlag(int edgeFlag) {
         this.edgeFlag = edgeFlag;
     }
 }

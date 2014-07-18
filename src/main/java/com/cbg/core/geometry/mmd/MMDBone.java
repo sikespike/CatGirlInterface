@@ -8,7 +8,7 @@ package com.cbg.core.geometry.mmd;
  *
  */
 public class MMDBone {
-    private String boneName;
+    private String name;
     private int parentBone;
     private int childBone;
     private MMDBoneType boneType;
@@ -20,14 +20,14 @@ public class MMDBone {
     /**
      * @return the boneName
      */
-    public String getBoneName() {
-        return boneName;
+    public String getName() {
+        return name;
     }
     /**
      * @param boneName the boneName to set
      */
-    public void setBoneName(String boneName) {
-        this.boneName = boneName;
+    public void setName(String name) {
+        this.name = name;
     }
     /**
      * @return the parentBone

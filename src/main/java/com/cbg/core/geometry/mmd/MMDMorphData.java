@@ -12,18 +12,18 @@ import com.cbg.core.geometry.Vector;
  *
  */
 public class MMDMorphData {
-    private Long index;
+    private long index;
     private List<Vector> offset;
     /**
      * @return the index
      */
-    public Long getIndex() {
+    public long getIndex() {
         return index;
     }
     /**
      * @param index the index to set
      */
-    public void setIndex(Long index) {
+    public void setIndex(long index) {
         this.index = index;
     }
     /**

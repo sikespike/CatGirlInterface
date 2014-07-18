@@ -1,22 +1,23 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.core.geometry.mmd;
 
 import java.util.List;
+
 
 /**
  * @author Siebe
  * 
  */
-public class Triangle extends Polygon {
+public class MMDTriangle extends MMDPolygon {
 
     /**
      * @param verticies
      *            the verticies to set
      */
     @Override
-    public void setVerticies(List<Vertex> verticies) {
+    public void setVerticies(List<MMDVertex> verticies) {
         if (verticies != null && verticies.size() == 3) {
             this.verticies = verticies;
         } else {
@@ -31,7 +32,7 @@ public class Triangle extends Polygon {
      * com.cbg.core.geometry.Polygon#addVertex(com.cbg.core.geometry.Vertex)
      */
     @Override
-    public void addVertex(Vertex v) {
+    public void addVertex(MMDVertex v) {
         if (this.verticies == null || this.verticies.size() < 3) {
             super.addVertex(v);
         } else {

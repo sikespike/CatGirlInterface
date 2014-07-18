@@ -10,35 +10,36 @@ import java.util.List;
  *
  */
 public class MMDIk {
-    private int ikBoneIndex;
-    private int ikTailBoneIndex;
+    private MMDBone bone;
+    private MMDBone targetBone;
     private int numLinks;
     private int itCount;
     private float maxAngle;
-    private List<Long> polyIndexList;
+    private List<MMDBone> childBoneList;
+    
     /**
-     * @return the ikBoneIndex
+     * @return the bone
      */
-    public int getIkBoneIndex() {
-        return ikBoneIndex;
+    public MMDBone getBone() {
+        return bone;
     }
     /**
-     * @param ikBoneIndex the ikBoneIndex to set
+     * @param bone the bone to set
      */
-    public void setIkBoneIndex(int ikBoneIndex) {
-        this.ikBoneIndex = ikBoneIndex;
+    public void setBone(MMDBone bone) {
+        this.bone = bone;
     }
     /**
-     * @return the ikTailBoneIndex
+     * @return the targetBone
      */
-    public int getIkTailBoneIndex() {
-        return ikTailBoneIndex;
+    public MMDBone getTargetBone() {
+        return targetBone;
     }
     /**
-     * @param ikTailBoneIndex the ikTailBoneIndex to set
+     * @param targetBone the targetBone to set
      */
-    public void setIkTailBoneIndex(int ikTailBoneIndex) {
-        this.ikTailBoneIndex = ikTailBoneIndex;
+    public void setTargetBone(MMDBone targetBone) {
+        this.targetBone = targetBone;
     }
     /**
      * @return the numLinks
@@ -77,15 +78,15 @@ public class MMDIk {
         this.maxAngle = maxAngle;
     }
     /**
-     * @return the polyIndexList
+     * @return the childBoneList
      */
-    public List<Long> getPolyIndexList() {
-        return polyIndexList;
+    public List<MMDBone> getChildBoneList() {
+        return childBoneList;
     }
     /**
-     * @param polyIndexList the polyIndexList to set
+     * @param childBoneList the childBoneList to set
      */
-    public void setPolyIndexList(List<Long> polyIndexList) {
-        this.polyIndexList = polyIndexList;
+    public void setChildBoneList(List<MMDBone> childBoneList) {
+        this.childBoneList = childBoneList;
     }
 }
