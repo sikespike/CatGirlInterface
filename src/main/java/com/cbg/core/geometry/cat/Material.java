@@ -10,6 +10,19 @@ public class Material {
 
     private String texture;
 
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+
+        b.append("{color:");
+        b.append(color.toString()).append(",specLight:")
+                .append(specLight.toString()).append(",ambientLight:")
+                .append(ambientLight.toString()).append(",texture:")
+                .append("\"" + texture + "\"").append("}");
+
+        return b.toString();
+    }
+
     /**
      * @return the color
      */

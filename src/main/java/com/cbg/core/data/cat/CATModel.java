@@ -4,9 +4,9 @@
 package com.cbg.core.data.cat;
 
 import java.util.List;
-import java.util.Map;
 
 import com.cbg.core.geometry.cat.Bone;
+import com.cbg.core.geometry.cat.DisplayBoneGroupList;
 import com.cbg.core.geometry.cat.Joint;
 import com.cbg.core.geometry.cat.Material;
 import com.cbg.core.geometry.cat.Motion;
@@ -24,7 +24,7 @@ public class CATModel {
     private List<Bone> bones;
     private List<Motion> motions;
     private List<VertexMorph> vertexMorphList;
-    private Map<String, List<Bone>> displayBoneGroups;
+    private DisplayBoneGroupList displayBoneGroups;
     private List<String> toonTextureList;
     private List<RigidBody> rigidBodyList;
     private List<Joint> jointList;
@@ -88,16 +88,10 @@ public class CATModel {
     public void setVertexMorphList(List<VertexMorph> vertexMorphList) {
         this.vertexMorphList = vertexMorphList;
     }
-    /**
-     * @return the displayBoneGroups
-     */
-    public Map<String, List<Bone>> getDisplayBoneGroups() {
+    public DisplayBoneGroupList getDisplayBoneGroups() {
         return displayBoneGroups;
     }
-    /**
-     * @param displayBoneGroups the displayBoneGroups to set
-     */
-    public void setDisplayBoneGroups(Map<String, List<Bone>> displayBoneGroups) {
+    public void setDisplayBoneGroups(DisplayBoneGroupList displayBoneGroups) {
         this.displayBoneGroups = displayBoneGroups;
     }
     /**

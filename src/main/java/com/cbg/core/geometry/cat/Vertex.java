@@ -3,71 +3,57 @@
  */
 package com.cbg.core.geometry.cat;
 
+import com.cbg.core.geometry.Vector;
+import com.cbg.core.geometry.Vector2;
+
 /**
  * @author Siebe
- *
+ * 
  */
 public class Vertex {
-    private float[] point;
-    private float[] normal;
-    
-    private float[] uv;
-    
-    public Vertex(){
-        this.point = initVector(4);
-        this.normal = initVector(4);
-        this.uv = initVector(2);
-    }
-    
-    private float[] initVector(int size){
-        float[] vector = new float[size];
-        
-        for(int x=0;x<size;x++){
-            vector[x] = 0.0f;
-        }
-        
-        return vector;
+    private Vector position;
+    private Vector normal;
+
+    private Vector2 uv;
+
+    public Vertex() {
+        this.position = new Vector();
+        this.normal = new Vector();
+        this.uv = new Vector2();
     }
 
-    /**
-     * @return the point
-     */
-    public float[] getPoint() {
-        return point;
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+
+        b.append("{position:").append(this.position.toString())
+                .append(",normal:").append(this.normal.toString())
+                .append(",uv:").append(this.uv.toString()).append("}");
+
+        return b.toString();
     }
 
-    /**
-     * @param point the point to set
-     */
-    public void setPoint(float[] point) {
-        this.point = point;
+    public Vector getPosition() {
+        return position;
     }
 
-    /**
-     * @return the normal
-     */
-    public float[] getNormal() {
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
+    public Vector getNormal() {
         return normal;
     }
 
-    /**
-     * @param normal the normal to set
-     */
-    public void setNormal(float[] normal) {
+    public void setNormal(Vector normal) {
         this.normal = normal;
     }
 
-    /**
-     * @return the uv
-     */
-    public float[] getUv() {
+    public Vector2 getUv() {
         return uv;
     }
 
-    /**
-     * @param uv the uv to set
-     */
-    public void setUv(float[] uv) {
+    public void setUv(Vector2 uv) {
         this.uv = uv;
     }
 }

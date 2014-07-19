@@ -42,4 +42,23 @@ public abstract class Polygon {
     public void setVerticies(List<Vertex> verticies) {
         this.verts = verticies;
     }
+    
+    @Override
+    public String toString(){
+        StringBuilder b = new StringBuilder();
+        
+        b.append("{polygon:[");
+        for(int x=0;x<this.verts.size();x++){
+            Vertex v = this.verts.get(x);
+            
+            b.append(v.toString());
+            
+            if(x+1 != this.verts.size()){
+                b.append(",");
+            }
+        }
+        b.append("]}");
+        
+        return b.toString();
+    }
 }
