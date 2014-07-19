@@ -4,7 +4,9 @@
 package com.cbg.core.data.mmd;
 
 import java.io.FileInputStream;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -13,7 +15,6 @@ import java.util.Map;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.geometry.mmd.MMDBone;
-import com.cbg.core.geometry.mmd.MMDBoneType;
 import com.cbg.core.geometry.mmd.MMDIk;
 import com.cbg.core.geometry.mmd.MMDJoint;
 import com.cbg.core.geometry.mmd.MMDMaterial;
@@ -35,6 +36,13 @@ public class MMDImporter implements Runnable {
     public MMDImporter(String fileName) {
         this.fileName = fileName;
         model = new MMDModel();
+    }
+
+    /**
+     * @return the model
+     */
+    public MMDModel getModel() {
+        return model;
     }
 
     public void run() {
@@ -73,6 +81,7 @@ public class MMDImporter implements Runnable {
         byte[] modelName = new byte[20];
         byte[] modelComment = new byte[256];
 
+        System.out.print("Reading header...");
         fs.read(fileVersion);
         float versionNumber = readFloat();
         fs.read(modelName);
@@ -85,6 +94,7 @@ public class MMDImporter implements Runnable {
         header.setModelComment(new String(modelComment));
 
         this.model.setHeader(header);
+        System.out.println("complete");
     }
 
     private float readFloat() throws Exception {
@@ -93,14 +103,15 @@ public class MMDImporter implements Runnable {
         fs.read(array);
 
         ByteBuffer b = ByteBuffer.wrap(array);
-        return b.getFloat();
+        return b.order(ByteOrder.LITTLE_ENDIAN).getFloat();
     }
 
     private void readVertices() throws Exception {
-        long vertexCount = readUnsignedInt();
+        int vertexCount = readUnsignedInt();
         List<MMDVertex> vertexList = new ArrayList<MMDVertex>();
 
-        for (long x = 0; x < vertexCount; x++) {
+        System.out.print("Reading Verticies...");
+        for (int x = 0; x < vertexCount; x++) {
             MMDVertex v = new MMDVertex();
 
             v.setX(readFloat());
@@ -122,7 +133,8 @@ public class MMDImporter implements Runnable {
 
             vertexList.add(v);
         }
-
+        System.out.println("complete");
+        System.out.println(vertexList.size() + " verticies loaded.");
         this.model.setVertexList(vertexList);
     }
 
@@ -130,57 +142,83 @@ public class MMDImporter implements Runnable {
         byte[] array = new byte[1];
 
         fs.read(array);
-        byte[] longArray = new byte[4];
-        ByteBuffer b = ByteBuffer.wrap(longArray);
-        b.put(array, 3, 1);
-        return b.getInt();
+        BigInteger b = new BigInteger(array);
+        return b.intValue();
     }
 
     private int readUnsignedShort() throws Exception {
         byte[] array = new byte[2];
 
         fs.read(array);
-        byte[] longArray = new byte[4];
+        byte[] longArray = initByteArray(8);
+        longArray = putByteArray(longArray, array);
         ByteBuffer b = ByteBuffer.wrap(longArray);
-        b.put(array, 2, 2);
-        return b.getInt();
+        int result = b.order(ByteOrder.LITTLE_ENDIAN).getInt();
+        return result;
     }
 
-    private long readUnsignedInt() throws Exception {
+    private int readUnsignedInt() throws Exception {
         byte[] array = new byte[4];
 
         fs.read(array);
-        byte[] longArray = new byte[8];
-        ByteBuffer b = ByteBuffer.wrap(longArray);
-        b.put(array, 4, 4);
-        return b.getLong();
+        ByteBuffer b = ByteBuffer.wrap(array);
+        int result = b.order(ByteOrder.LITTLE_ENDIAN).getInt();
+        return result;
+    }
+
+    private byte[] putByteArray(byte[] to, byte[] from) {
+
+        for (int x = 0; x < from.length; x++) {
+            to[x] = from[x];
+        }
+
+        return to;
+    }
+
+    private byte[] initByteArray(int size) {
+        byte[] array = new byte[size];
+
+        for (int x = 0; x < size; x++) {
+            array[x] = 0x0;
+        }
+
+        return array;
     }
 
     private void readPolygon() throws Exception {
-        long polyCount = readUnsignedInt();
+        int polyCount = readUnsignedInt() / 3;
 
         List<MMDTriangle> polyList = new ArrayList<MMDTriangle>();
 
         List<MMDVertex> vertexList = this.model.getVertexList();
-        for (long x = 0; x < polyCount; x++) {
+
+        System.out.print("Reading Polygons...");
+
+        for (int x = 0; x < polyCount; x++) {
             MMDTriangle t = new MMDTriangle();
 
             t.addVertex(vertexList.get(this.readUnsignedShort()));
+
             t.addVertex(vertexList.get(this.readUnsignedShort()));
+
             t.addVertex(vertexList.get(this.readUnsignedShort()));
 
             polyList.add(t);
         }
 
+        System.out.println("compelete");
+        System.out.println(polyList.size() + " polygons read.");
         this.model.setTriangleList(polyList);
     }
 
     private void readMaterials() throws Exception {
-        long matCount = readUnsignedInt();
+        int matCount = readUnsignedInt();
 
         List<MMDMaterial> list = new ArrayList<MMDMaterial>();
 
-        for (long x = 0; x < matCount; x++) {
+        System.out.print("Reading Materials...");
+
+        for (int x = 0; x < matCount; x++) {
             MMDMaterial m = new MMDMaterial();
 
             m.setR(readFloat());
@@ -206,6 +244,8 @@ public class MMDImporter implements Runnable {
             list.add(m);
         }
 
+        System.out.println("complete");
+        System.out.println(list.size()+" materials read.");
         this.model.setMaterialList(list);
     }
 
@@ -220,11 +260,12 @@ public class MMDImporter implements Runnable {
     }
 
     private void readBones() throws Exception {
-        long boneCount = readUnsignedInt();
+        int boneCount = readUnsignedInt();
 
         List<MMDBone> list = new ArrayList<MMDBone>();
 
-        for (long x = 0; x < boneCount; x++) {
+        System.out.print("Reading Bones...");
+        for (int x = 0; x < boneCount; x++) {
             MMDBone b = new MMDBone();
 
             b.setName(readString(20));
@@ -237,7 +278,7 @@ public class MMDImporter implements Runnable {
             child = child == 0xffff ? -1 : child;
             b.setChildBoneIndex(child);
 
-            b.setBoneType(MMDBoneType.getMMDBoneType(readByte()));
+            b.setBoneType(readByte());
             b.setTargetBoneIndex(readUnsignedShort());
 
             b.setX(readFloat());
@@ -247,17 +288,19 @@ public class MMDImporter implements Runnable {
             list.add(b);
         }
 
+        System.out.println("complete");
         this.model.setBoneList(list);
     }
 
     private void readIK() throws Exception {
-        long ikCount = readUnsignedInt();
+        int ikCount = readUnsignedInt();
 
         List<MMDIk> list = new ArrayList<MMDIk>();
 
         List<MMDBone> boneList = this.model.getBoneList();
 
-        for (long x = 0; x < ikCount; x++) {
+        System.out.print("Reading IK...");
+        for (int x = 0; x < ikCount; x++) {
             MMDIk k = new MMDIk();
 
             k.setBone(boneList.get(readUnsignedShort()));
@@ -276,16 +319,17 @@ public class MMDImporter implements Runnable {
 
             list.add(k);
         }
-
+        System.out.println("complete");
         this.model.setIkList(list);
     }
 
     private void readMorphs() throws Exception {
-        long morphCount = readUnsignedInt();
+        int morphCount = readUnsignedInt();
 
         List<MMDVertexMorph> list = new ArrayList<MMDVertexMorph>();
 
-        for (long x = 0; x < morphCount; x++) {
+        System.out.print("Reading Morphs...");
+        for (int x = 0; x < morphCount; x++) {
             MMDVertexMorph m = new MMDVertexMorph();
 
             m.setName(readString(20));
@@ -311,6 +355,7 @@ public class MMDImporter implements Runnable {
             list.add(m);
         }
 
+        System.out.println("complete");
         this.model.setVertexMorphList(list);
     }
 
@@ -332,6 +377,7 @@ public class MMDImporter implements Runnable {
 
         List<MMDVertexMorph> facialMorphList = new ArrayList<MMDVertexMorph>();
 
+        System.out.print("Reading Display Items...");
         for (int x = 0; x < faceMorphCount; x++) {
             facialMorphList.add(vertexMorphList.get(readUnsignedShort()));
         }
@@ -353,9 +399,9 @@ public class MMDImporter implements Runnable {
 
         List<MMDBone> boneList = this.model.getBoneList();
         String[] gNames = groupNames.toArray(new String[groupNames.size()]);
-        long displayBones = readUnsignedInt();
+        int displayBones = readUnsignedInt();
 
-        for (long x = 0; x < displayBones; x++) {
+        for (int x = 0; x < displayBones; x++) {
             int boneIndex = readUnsignedShort();
             int displayIndex = readByte();
 
@@ -364,13 +410,14 @@ public class MMDImporter implements Runnable {
             displayBoneGroups.get(groupName).add(boneList.get(boneIndex));
         }
 
+        System.out.println("complete");
         this.model.setFacialMorphList(facialMorphList);
         this.model.setDisplayBoneGroups(displayBoneGroups);
     }
 
     private void readExtendedData() throws Exception {
         int engFlag = readByte();
-
+        System.out.print("Reading Extended Data...");
         if (engFlag == 1) {
             String name = readString(20);
             String comment = readString(256);
@@ -387,26 +434,30 @@ public class MMDImporter implements Runnable {
                 String displayName = readString(50);
             }
         }
+        System.out.println("complete");
     }
 
     private void readToonTextures() throws Exception {
         List<String> toonTextureList = new ArrayList<String>();
 
+        System.out.print("Reading Toon Textures...");
         for (int x = 0; x < 10; x++) {
             toonTextureList.add(readString(100));
         }
 
+        System.out.println("complete");
         this.model.setToonTextureList(toonTextureList);
     }
 
     private void readRigidBodies() throws Exception {
-        long bodyCount = readUnsignedInt();
+        int bodyCount = readUnsignedInt();
 
         List<MMDRigidBody> list = new ArrayList<MMDRigidBody>();
 
         List<MMDBone> boneList = this.model.getBoneList();
 
-        for (long x = 0; x < bodyCount; x++) {
+        System.out.print("Reading Rigid Bodies...");
+        for (int x = 0; x < bodyCount; x++) {
             MMDRigidBody b = new MMDRigidBody();
 
             b.setName(readString(20));
@@ -439,6 +490,7 @@ public class MMDImporter implements Runnable {
             list.add(b);
         }
 
+        System.out.println("complete");
         this.model.setRigidBodyList(list);
     }
 
@@ -454,13 +506,14 @@ public class MMDImporter implements Runnable {
     }
 
     private void readJoints() throws Exception {
-        long jointCount = readUnsignedInt();
+        int jointCount = readUnsignedInt();
 
         List<MMDJoint> list = new ArrayList<MMDJoint>();
 
         List<MMDRigidBody> rigidBodyList = this.model.getRigidBodyList();
 
-        for (long x = 0; x < jointCount; x++) {
+        System.out.print("Reading Joints...");
+        for (int x = 0; x < jointCount; x++) {
             MMDJoint j = new MMDJoint();
 
             j.setName(readString(20));
@@ -481,22 +534,26 @@ public class MMDImporter implements Runnable {
             list.add(j);
         }
 
+        System.out.println("complete");
         this.model.setJointList(list);
     }
 
     private void initializeVertexBones() {
         List<MMDBone> boneList = this.model.getBoneList();
 
+        System.out.print("Initializing Vertex Bones...");
         for (MMDVertex v : this.model.getVertexList()) {
             v.setBone0(boneList.get(v.getBone0Index()));
             v.setBone1(boneList.get(v.getBone1Index()));
         }
+        System.out.println("complete");
     }
 
     private void initializeBoneBones() {
         List<MMDBone> boneList = this.model.getBoneList();
 
-        for (int x=0;x<boneList.size();x++) {
+        System.out.print("Initializing Bone's Bones...");
+        for (int x = 0; x < boneList.size(); x++) {
             MMDBone b = boneList.get(x);
             b.setIndex(x);
             int pbIndex = b.getParentBoneIndex();
@@ -513,15 +570,20 @@ public class MMDImporter implements Runnable {
                 b.setTargetBone(boneList.get(tbIndex));
             }
         }
+
+        System.out.println("complete");
     }
-    
-    private void initializeRigidBodies(){
+
+    private void initializeRigidBodies() {
         List<MMDRigidBody> rigids = this.model.getRigidBodyList();
-        
-        int x=0;
-        for(MMDRigidBody r:rigids){
+
+        System.out.print("Initializing Rigid Bodies...");
+        int x = 0;
+        for (MMDRigidBody r : rigids) {
             r.setIndex(x);
             x++;
         }
+
+        System.out.println("complete");
     }
 }

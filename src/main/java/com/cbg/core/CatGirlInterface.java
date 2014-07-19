@@ -27,7 +27,16 @@ public class CatGirlInterface {
                 converter.run();
                 System.out.println("Finished.");
             }
+        } else if (action[0].equalsIgnoreCase("model")){
+            if (action[1].equalsIgnoreCase("convert")) {
+                String source = args[0] + "/" + args[2];
+                String dest = args[0] + "/" + args[3];
+
+                MapConverter converter = new MapConverter(source, dest);
+                System.out.println("Starting Convert...");
+                converter.run();
+                System.out.println("Finished.");
+            }
         }
     }
-
 }

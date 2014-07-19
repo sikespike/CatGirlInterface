@@ -12,7 +12,7 @@ public class MMDBone {
     private String name;
     private int parentBoneIndex;
     private int childBoneIndex;
-    private MMDBoneType boneType;
+    private int boneType;
     private int targetBoneIndex;
     
     private float x;
@@ -73,13 +73,13 @@ public class MMDBone {
     /**
      * @return the boneType
      */
-    public MMDBoneType getBoneType() {
+    public int getBoneType() {
         return boneType;
     }
     /**
      * @param boneType the boneType to set
      */
-    public void setBoneType(MMDBoneType boneType) {
+    public void setBoneType(int boneType) {
         this.boneType = boneType;
     }
     /**
