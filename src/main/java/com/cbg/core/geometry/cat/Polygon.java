@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,8 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  *
  */
-public abstract class Polygon {
+public abstract class Polygon implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected List<Vertex> verts;
     
     public Polygon(){

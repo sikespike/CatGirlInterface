@@ -5,6 +5,7 @@ import java.util.List;
 import com.cbg.core.geometry.Vector;
 
 public class MMDRigidBody {
+    private int index;
     private String name;
     private MMDBone bone;
     private int collisionGroupId;
@@ -22,6 +23,20 @@ public class MMDRigidBody {
     private float friction;
 
     private int mode;
+
+    /**
+     * @return the index
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     /**
      * @return the name

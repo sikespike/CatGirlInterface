@@ -3,14 +3,15 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Siebe
  *
  */
-public class Triangle extends Polygon {
-
+public class Triangle extends Polygon implements Serializable{
+    private static final long serialVersionUID = 1L;
     /**
      * 
      */

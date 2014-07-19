@@ -1,8 +1,11 @@
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
+
 import com.cbg.core.geometry.Vector;
 
-public class Material {
+public class Material implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Vector color;
     private Vector specLight;

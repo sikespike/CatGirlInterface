@@ -3,6 +3,7 @@
  */
 package com.cbg.core.data.cat;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.cbg.core.geometry.cat.Bone;
@@ -18,7 +19,9 @@ import com.cbg.core.geometry.cat.VertexMorph;
  * @author Siebe
  *
  */
-public class CATModel {
+public class CATModel implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private List<Material> materials;
     private List<Triangle> polygons;
     private List<Bone> bones;

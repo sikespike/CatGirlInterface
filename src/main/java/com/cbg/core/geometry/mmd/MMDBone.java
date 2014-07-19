@@ -8,6 +8,7 @@ package com.cbg.core.geometry.mmd;
  *
  */
 public class MMDBone {
+    private int index;
     private String name;
     private int parentBoneIndex;
     private int childBoneIndex;
@@ -21,6 +22,18 @@ public class MMDBone {
     private MMDBone parentBone;
     private MMDBone childBone;
     private MMDBone targetBone;
+    /**
+     * @return the index
+     */
+    public int getIndex() {
+        return index;
+    }
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
     /**
      * @return the name
      */

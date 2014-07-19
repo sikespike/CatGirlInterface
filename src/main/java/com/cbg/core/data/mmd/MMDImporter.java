@@ -57,6 +57,7 @@ public class MMDImporter implements Runnable {
 
                 initializeVertexBones();
                 initializeBoneBones();
+                initializeRigidBodies();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             } finally {
@@ -495,7 +496,9 @@ public class MMDImporter implements Runnable {
     private void initializeBoneBones() {
         List<MMDBone> boneList = this.model.getBoneList();
 
-        for (MMDBone b : boneList) {
+        for (int x=0;x<boneList.size();x++) {
+            MMDBone b = boneList.get(x);
+            b.setIndex(x);
             int pbIndex = b.getParentBoneIndex();
             int cbIndex = b.getChildBoneIndex();
             int tbIndex = b.getTargetBoneIndex();
@@ -509,6 +512,16 @@ public class MMDImporter implements Runnable {
             if (tbIndex != -1) {
                 b.setTargetBone(boneList.get(tbIndex));
             }
+        }
+    }
+    
+    private void initializeRigidBodies(){
+        List<MMDRigidBody> rigids = this.model.getRigidBodyList();
+        
+        int x=0;
+        for(MMDRigidBody r:rigids){
+            r.setIndex(x);
+            x++;
         }
     }
 }

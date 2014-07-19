@@ -3,6 +3,8 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
+
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
 
@@ -10,7 +12,10 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  * 
  */
-public class Bone {
+
+public class Bone implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private String name;
     private Bone parent;
     private Bone child;

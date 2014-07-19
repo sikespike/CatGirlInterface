@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.cbg.core.geometry.Vector;
@@ -12,7 +13,8 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  * 
  */
-public class MorphData {
+public class MorphData implements Serializable{
+    private static final long serialVersionUID = 1L;
     private long index;
     private List<Vector> offset;
 

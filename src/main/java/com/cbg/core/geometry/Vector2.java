@@ -3,17 +3,25 @@
  */
 package com.cbg.core.geometry;
 
+import java.io.Serializable;
+
 /**
  * @author Xif
  * 
  */
-public class Vector2 {
+public class Vector2 implements Serializable{
+    private static final long serialVersionUID = 1L;
     private float x;
     private float y;
 
     public Vector2(){
         this.x = 0.0f;
         this.y = 0.0f;
+    }
+    
+    public Vector2(float x, float y){
+        this.x = x;
+        this.y = y;
     }
     
     public Vector2(float[] vector){

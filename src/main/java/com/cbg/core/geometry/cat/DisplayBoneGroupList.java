@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +16,8 @@ import com.cbg.core.util.StringUtil;
  * @author Xif
  * 
  */
-public class DisplayBoneGroupList {
+public class DisplayBoneGroupList implements Serializable{
+    private static final long serialVersionUID = 1L;
     private List<String> keys;
     private Map<String, List<Bone>> groups;
 

@@ -1,11 +1,13 @@
 package com.cbg.core.geometry.cat;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
 
-public class RigidBody {
+public class RigidBody implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String name;
     private Bone bone;
     private int collisionGroupId;
@@ -22,7 +24,7 @@ public class RigidBody {
     private float bounce;
     private float friction;
 
-    private int mode;
+    private String mode;
 
     /*
      * (non-Javadoc)
@@ -254,7 +256,7 @@ public class RigidBody {
     /**
      * @return the mode
      */
-    public int getMode() {
+    public String getMode() {
         return mode;
     }
 
@@ -262,7 +264,7 @@ public class RigidBody {
      * @param mode
      *            the mode to set
      */
-    public void setMode(int mode) {
+    public void setMode(String mode) {
         this.mode = mode;
     }
 }

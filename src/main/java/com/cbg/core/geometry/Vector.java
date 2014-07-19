@@ -3,11 +3,14 @@
  */
 package com.cbg.core.geometry;
 
+import java.io.Serializable;
+
 /**
  * @author Siebe
  * 
  */
-public class Vector {
+public class Vector implements Serializable{
+    private static final long serialVersionUID = 1L;
     private float x;
     private float y;
     private float z;
@@ -18,6 +21,13 @@ public class Vector {
         this.y = 0.0f;
         this.z = 0.0f;
         this.a = 0.0f;
+    }
+    
+    public Vector(float x, float y, float z, float a){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.a = a;
     }
     
     public Vector(float[] vector){
