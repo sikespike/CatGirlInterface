@@ -1,11 +1,12 @@
 package com.cbg.core.geometry.cat;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
 
-public class RigidBody implements Serializable{
+public class RigidBody implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private Bone bone;
@@ -55,6 +56,43 @@ public class RigidBody implements Serializable{
         b.append("}");
 
         return b.toString();
+    }
+
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.name = (String) stream.readObject();
+        this.bone = (Bone) stream.readObject();
+        this.collisionGroupId = stream.readInt();
+        this.collisionMaskId = stream.readInt();
+        this.shape = (String) stream.readObject();
+        this.size = (Vector) stream.readObject();
+        this.position = (Vector) stream.readObject();
+        this.rotation = (Vector) stream.readObject();
+        this.mass = stream.readFloat();
+        this.velocityAtt = stream.readFloat();
+        this.rotationAtt = stream.readFloat();
+        this.bounce = stream.readFloat();
+        this.friction = stream.readFloat();
+        this.mode = (String) stream.readObject();
+
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.name);
+        stream.writeObject(this.bone);
+        stream.writeObject(this.collisionGroupId);
+        stream.writeObject(this.collisionMaskId);
+        stream.writeObject(this.shape);
+        stream.writeObject(this.size);
+        stream.writeObject(this.position);
+        stream.writeObject(this.rotation);
+        stream.writeObject(this.mass);
+        stream.writeObject(this.velocityAtt);
+        stream.writeObject(this.rotationAtt);
+        stream.writeObject(this.bounce);
+        stream.writeObject(this.friction);
+        stream.writeObject(this.mode);
     }
 
     /**
@@ -140,7 +178,8 @@ public class RigidBody implements Serializable{
     }
 
     /**
-     * @param size the size to set
+     * @param size
+     *            the size to set
      */
     public void setSize(Vector size) {
         this.size = size;
@@ -154,7 +193,8 @@ public class RigidBody implements Serializable{
     }
 
     /**
-     * @param position the position to set
+     * @param position
+     *            the position to set
      */
     public void setPosition(Vector position) {
         this.position = position;
@@ -168,7 +208,8 @@ public class RigidBody implements Serializable{
     }
 
     /**
-     * @param rotation the rotation to set
+     * @param rotation
+     *            the rotation to set
      */
     public void setRotation(Vector rotation) {
         this.rotation = rotation;

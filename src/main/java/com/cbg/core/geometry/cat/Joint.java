@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import com.cbg.core.geometry.Vector;
@@ -12,7 +13,7 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  * 
  */
-public class Joint implements Serializable{
+public class Joint implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private RigidBody sourceRigidBody;
@@ -41,6 +42,9 @@ public class Joint implements Serializable{
                 .append(StringUtil.jsonParamater("sourceRigidBody",
                         this.sourceRigidBody))
                 .append(",")
+                .append(StringUtil.jsonParamater("destRigidBody",
+                        this.sourceRigidBody))
+                .append(",")
                 .append(StringUtil.jsonParamater("location", this.location))
                 .append(",")
                 .append(StringUtil.jsonParamater("rotation", this.rotation))
@@ -53,8 +57,6 @@ public class Joint implements Serializable{
                 .append(",")
                 .append(StringUtil.jsonParamater("maxRot", this.maxRot))
                 .append(",")
-                .append(StringUtil.jsonParamater("maxRot", this.maxRot))
-                .append(",")
                 .append(StringUtil.jsonParamater("springConst",
                         this.springConst))
                 .append(",")
@@ -63,6 +65,37 @@ public class Joint implements Serializable{
         b.append("}");
 
         return b.toString();
+    }
+
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.name = (String)stream.readObject();
+        this.sourceRigidBody = (RigidBody)stream.readObject();
+        this.destRigidBody = (RigidBody)stream.readObject();
+        this.location = (Vector)stream.readObject();
+        this.rotation = (Vector)stream.readObject();
+        this.minLoc = (Vector)stream.readObject();
+        this.maxLoc = (Vector)stream.readObject();
+        this.minRot = (Vector)stream.readObject();
+        this.maxRot = (Vector)stream.readObject();
+        this.springConst = (Vector)stream.readObject();
+        this.springRotConst = (Vector)stream.readObject();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.name);
+        stream.writeObject(this.sourceRigidBody);
+        stream.writeObject(this.destRigidBody);
+        stream.writeObject(this.location);
+        stream.writeObject(this.rotation);
+        stream.writeObject(this.minLoc);
+        stream.writeObject(this.maxLoc);
+        stream.writeObject(this.minRot);
+        stream.writeObject(this.maxRot);
+        stream.writeObject(this.maxRot);
+        stream.writeObject(this.springConst);
+        stream.writeObject(this.springRotConst);
     }
 
     /**

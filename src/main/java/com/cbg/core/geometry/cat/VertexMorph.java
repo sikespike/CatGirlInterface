@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -38,6 +39,21 @@ public class VertexMorph implements Serializable {
         return b.toString();
     }
 
+    @SuppressWarnings("all")
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.name = (String)stream.readObject();
+        this.type = stream.readInt();
+        this.data = (List<MorphData>)stream.readObject();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.name);
+        stream.writeInt(this.type);
+        stream.writeObject(this.data);
+    }
+    
     /**
      * @return the name
      */

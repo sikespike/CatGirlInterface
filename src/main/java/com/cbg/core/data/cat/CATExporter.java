@@ -3,13 +3,11 @@
  */
 package com.cbg.core.data.cat;
 
-import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 /**
  * @author Siebe
@@ -36,14 +34,13 @@ public class CATExporter implements Runnable{
         try{
             Path path = Paths.get(URI.create("file://"+this.fileName));
             Files.deleteIfExists(path);
-            Path f = Files.createFile(path);
-            BufferedWriter w = Files.newBufferedWriter(f, Charset.forName("UTF-8"), StandardOpenOption.WRITE);
+            FileOutputStream out = new FileOutputStream(this.fileName);
             
-            CATModelSerializer s = new CATModelSerializer(this.model);
+            CATModelBinaryWriter writer = new CATModelBinaryWriter(this.model,out);
             
-            s.writeObject(w);
+            writer.writeModel();
             
-            w.close();
+            out.close();
         } catch (Exception e){
             throw new RuntimeException(e);
         }

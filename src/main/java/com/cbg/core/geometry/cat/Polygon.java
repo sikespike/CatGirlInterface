@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +57,16 @@ public abstract class Polygon implements Serializable{
         b.append("}");
         
         return b.toString();
+    }
+    
+    @SuppressWarnings("all")
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.verts = (List<Vertex>)stream.readObject();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.verts);
     }
 }

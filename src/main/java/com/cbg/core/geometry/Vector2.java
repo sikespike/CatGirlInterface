@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -40,6 +41,19 @@ public class Vector2 implements Serializable{
         b.append("{x:").append(this.x).append(",y:").append(this.y).append("}");
         
         return b.toString();
+    }
+    
+    @SuppressWarnings("all")
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.x = stream.readFloat();
+        this.y = stream.readFloat();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeFloat(this.x);
+        stream.writeFloat(this.y);
     }
     
     public float getX() {

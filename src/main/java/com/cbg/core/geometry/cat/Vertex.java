@@ -3,6 +3,7 @@
  */
 package com.cbg.core.geometry.cat;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import com.cbg.core.geometry.Vector;
@@ -21,7 +22,9 @@ public class Vertex implements Serializable {
     private Vector2 uv;
 
     private Bone bone0;
+    private String bone0Name;
     private Bone bone1;
+    private String bone1Name;
 
     private int bone0Weight;
 
@@ -53,6 +56,27 @@ public class Vertex implements Serializable {
         return b.toString();
     }
 
+    @SuppressWarnings("all")
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.position = (Vector)stream.readObject();
+        this.normal = (Vector)stream.readObject();
+        this.uv  = (Vector2)stream.readObject();
+        this.bone0Name = (String)stream.readObject();
+        this.bone1Name = (String)stream.readObject();
+        this.bone0Weight = stream.readInt();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.position);
+        stream.writeObject(this.normal);
+        stream.writeObject(this.uv);
+        stream.writeObject(this.bone0.getName());
+        stream.writeObject(this.bone1.getName());
+        stream.writeInt(this.bone0Weight);
+    }
+    
     public Vector getPosition() {
         return position;
     }
@@ -120,5 +144,33 @@ public class Vertex implements Serializable {
      */
     public void setBone0Weight(int bone0Weight) {
         this.bone0Weight = bone0Weight;
+    }
+
+    /**
+     * @return the bone0Name
+     */
+    public String getBone0Name() {
+        return bone0Name;
+    }
+
+    /**
+     * @param bone0Name the bone0Name to set
+     */
+    public void setBone0Name(String bone0Name) {
+        this.bone0Name = bone0Name;
+    }
+
+    /**
+     * @return the bone1Name
+     */
+    public String getBone1Name() {
+        return bone1Name;
+    }
+
+    /**
+     * @param bone1Name the bone1Name to set
+     */
+    public void setBone1Name(String bone1Name) {
+        this.bone1Name = bone1Name;
     }
 }
