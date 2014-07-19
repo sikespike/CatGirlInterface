@@ -33,23 +33,20 @@ public class CATExporter implements Runnable{
     }
     
     public void run() {
-        String serializedModel = serializeModel();
         try{
-            Path f = Files.createFile(Paths.get(URI.create("file://"+this.fileName)));
-            BufferedWriter w = Files.newBufferedWriter(f, Charset.forName("UTF-8"), StandardOpenOption.CREATE_NEW);
+            Path path = Paths.get(URI.create("file://"+this.fileName));
+            Files.deleteIfExists(path);
+            Path f = Files.createFile(path);
+            BufferedWriter w = Files.newBufferedWriter(f, Charset.forName("UTF-8"), StandardOpenOption.WRITE);
             
-            w.write(serializedModel);
+            CATModelSerializer s = new CATModelSerializer(this.model);
+            
+            s.writeObject(w);
             
             w.close();
         } catch (Exception e){
             throw new RuntimeException(e);
         }
-    }
-    
-    private String serializeModel(){
-        CATModelSerializer s = new CATModelSerializer(this.model);
-        
-        return s.serialize();
     }
 
     public String getFileName() {

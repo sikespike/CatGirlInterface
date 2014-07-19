@@ -3,6 +3,8 @@
  */
 package com.cbg.core.data.cat;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.List;
 
 import com.cbg.core.geometry.cat.Bone;
@@ -44,6 +46,37 @@ public class CATModelSerializer {
         return b.toString();
     }
 
+    public void writeObject(BufferedWriter bf) throws IOException{
+        bf.write("{");
+        bf.write(serializeMaterials());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializePolygons());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeBones());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeMotions());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeMorphs());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeDisplayBoneGroups());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeToonTextureList());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeRigidBodyList());
+        bf.flush();
+        bf.write(",");
+        bf.write(serializeJointList());
+        bf.write("}");
+        bf.flush();
+    }
+    
     private String serializeJointList() {
         StringBuilder b = new StringBuilder();
 
@@ -66,6 +99,7 @@ public class CATModelSerializer {
         b.append("{rigidBody:").append(StringUtil.serializeJsonList(bodies))
                 .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
 

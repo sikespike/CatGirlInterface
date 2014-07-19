@@ -1,5 +1,6 @@
 package com.cbg.core;
 
+import com.cbg.core.data.MMDtoCATConverter;
 import com.cbg.core.map.MapConverter;
 
 /**
@@ -32,7 +33,7 @@ public class CatGirlInterface {
                 String source = args[0] + "/" + args[2];
                 String dest = args[0] + "/" + args[3];
 
-                MapConverter converter = new MapConverter(source, dest);
+                MMDtoCATConverter converter = new MMDtoCATConverter(source, dest);
                 System.out.println("Starting Convert...");
                 converter.run();
                 System.out.println("Finished.");
