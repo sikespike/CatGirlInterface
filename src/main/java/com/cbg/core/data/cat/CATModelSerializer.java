@@ -43,72 +43,94 @@ public class CATModelSerializer {
 
         return b.toString();
     }
+
     private String serializeJointList() {
         StringBuilder b = new StringBuilder();
 
         List<Joint> joints = this.model.getJointList();
 
-        b.append("{joint:").append(StringUtil.serializeJsonList(joints)).append("}");
+        System.out.print("Serializing Joints...");
+        b.append("{joint:").append(StringUtil.serializeJsonList(joints))
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
+
     private String serializeRigidBodyList() {
         StringBuilder b = new StringBuilder();
 
         List<RigidBody> bodies = this.model.getRigidBodyList();
 
-        b.append("{rigidBody:").append(StringUtil.serializeJsonList(bodies)).append("}");
+        System.out.print("Serializing Rigid Bodies...");
+        b.append("{rigidBody:").append(StringUtil.serializeJsonList(bodies))
+                .append("}");
 
         return b.toString();
     }
-    
+
     private String serializeToonTextureList() {
         StringBuilder b = new StringBuilder();
 
         List<String> textures = this.model.getToonTextureList();
 
-        b.append("{toonTexture:").append(StringUtil.implodeJson(textures)).append("}");
+        System.out.print("Serializing Toon Textures...");
+        b.append("{toonTexture:").append(StringUtil.implodeJson(textures))
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
-    
+
     private String serializeDisplayBoneGroups() {
         StringBuilder b = new StringBuilder();
 
         DisplayBoneGroupList displayBones = this.model.getDisplayBoneGroups();
 
-        b.append("{displayBoneGroup:").append(displayBones.toString()).append("}");
+        System.out.print("Serializing Display Bone Groups...");
+        b.append("{displayBoneGroup:").append(displayBones.toString())
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
-    
+
     private String serializeMorphs() {
         StringBuilder b = new StringBuilder();
 
         List<VertexMorph> list = this.model.getVertexMorphList();
 
-        b.append("{morph:").append(StringUtil.serializeJsonList(list)).append("}");
+        System.out.print("Serializing Morphs...");
+        b.append("{morph:").append(StringUtil.serializeJsonList(list))
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
-    
+
     private String serializeMotions() {
         StringBuilder b = new StringBuilder();
 
         List<Motion> motions = this.model.getMotions();
 
-        b.append("{motion:").append(StringUtil.serializeJsonList(motions)).append("}");
+        System.out.print("Serializing Motions...");
+        b.append("{motion:").append(StringUtil.serializeJsonList(motions))
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
-    
+
     private String serializeBones() {
         StringBuilder b = new StringBuilder();
 
         List<Bone> bones = this.model.getBones();
 
-        b.append("{bone:").append(StringUtil.serializeJsonList(bones)).append("}");
+        System.out.print("Serializing Bones...");
+        b.append("{bone:").append(StringUtil.serializeJsonList(bones))
+                .append("}");
 
+        System.out.println("complete");
         return b.toString();
     }
 
@@ -117,7 +139,11 @@ public class CATModelSerializer {
 
         List<Triangle> poly = this.model.getPolygons();
 
-        b.append("{polygon:").append(StringUtil.serializeJsonList(poly)).append("}");
+        System.out.print("Serializing Polygons...");
+        b.append("{polygon:").append(StringUtil.serializeJsonList(poly))
+                .append("}");
+
+        System.out.println("complete");
         return b.toString();
     }
 
@@ -125,8 +151,12 @@ public class CATModelSerializer {
         StringBuilder b = new StringBuilder();
 
         List<Material> mat = this.model.getMaterials();
-        b.append("{material:").append(StringUtil.serializeJsonList(mat)).append("}");
 
+        System.out.print("Serializing Materials...");
+        b.append("{material:").append(StringUtil.serializeJsonList(mat))
+                .append("}");
+
+        System.out.println("complete");
         return b.toString();
     }
 }

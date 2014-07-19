@@ -28,19 +28,27 @@ public class MMDtoCATConverter implements Runnable {
      */
     public void run() {
         MMDImporter mmdImporter = new MMDImporter(this.mmdModelFile);
-        
+        System.out
+                .println("----------------------------- Importing MMD Model ------------------------------");
         mmdImporter.run();
-        
+        System.out
+                .println("---------------------------------- Complete ------------------------------------");
         MMDModel mmdModel = mmdImporter.getModel();
-        
+
+        System.out
+                .println("-------------------------- Transforming to CAT Model ---------------------------");
         MMDtoCATTransformer transformer = new MMDtoCATTransformer(mmdModel);
-        
         transformer.run();
-        
+        System.out
+                .println("---------------------------------- Complete ------------------------------------");
         CATModel catModel = transformer.getCatModel();
-        
+
         CATExporter catExporter = new CATExporter(catModel, this.catModelFile);
-        
+
+        System.out
+                .println("----------------------------- Exporting CAT Model ------------------------------");
         catExporter.run();
+        System.out
+                .println("---------------------------------- Complete ------------------------------------");
     }
 }

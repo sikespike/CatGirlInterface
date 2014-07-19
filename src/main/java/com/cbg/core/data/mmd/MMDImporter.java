@@ -4,12 +4,10 @@
 package com.cbg.core.data.mmd;
 
 import java.io.FileInputStream;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -107,11 +105,11 @@ public class MMDImporter implements Runnable {
     }
 
     private void readVertices() throws Exception {
-        long vertexCount = readUnsignedInt();
+        int vertexCount = readUnsignedInt();
         List<MMDVertex> vertexList = new ArrayList<MMDVertex>();
 
         System.out.print("Reading Verticies...");
-        for (long x = 0; x < vertexCount; x++) {
+        for (int x = 0; x < vertexCount; x++) {
             MMDVertex v = new MMDVertex();
 
             v.setX(readFloat());
@@ -142,8 +140,11 @@ public class MMDImporter implements Runnable {
         byte[] array = new byte[1];
 
         fs.read(array);
-        BigInteger b = new BigInteger(array);
-        return b.intValue();
+        byte[] longArray = initByteArray(8);
+        longArray = putByteArray(longArray, array);
+        ByteBuffer b = ByteBuffer.wrap(longArray);
+        int result = b.order(ByteOrder.LITTLE_ENDIAN).getInt();
+        return result;
     }
 
     private int readUnsignedShort() throws Exception {
@@ -157,17 +158,17 @@ public class MMDImporter implements Runnable {
         return result;
     }
 
-    private long readUnsignedInt() throws Exception {
+    private int readUnsignedInt() throws Exception {
         byte[] array = new byte[4];
 
         fs.read(array);
         byte[] longArray = initByteArray(8);
         longArray = putByteArray(longArray, array);
         ByteBuffer b = ByteBuffer.wrap(longArray);
-        long result = b.order(ByteOrder.LITTLE_ENDIAN).getLong();
+        int result = b.order(ByteOrder.LITTLE_ENDIAN).getInt();
         return result;
     }
-    
+
     private byte[] putByteArray(byte[] to, byte[] from) {
 
         for (int x = 0; x < from.length; x++) {
@@ -188,7 +189,7 @@ public class MMDImporter implements Runnable {
     }
 
     private void readPolygon() throws Exception {
-        long polyCount = readUnsignedInt() / 3;
+        int polyCount = readUnsignedInt() / 3;
 
         List<MMDTriangle> polyList = new ArrayList<MMDTriangle>();
 
@@ -196,7 +197,7 @@ public class MMDImporter implements Runnable {
 
         System.out.print("Reading Polygons...");
 
-        for (long x = 0; x < polyCount; x++) {
+        for (int x = 0; x < polyCount; x++) {
             MMDTriangle t = new MMDTriangle();
 
             t.addVertex(vertexList.get(this.readUnsignedShort()));
@@ -214,13 +215,13 @@ public class MMDImporter implements Runnable {
     }
 
     private void readMaterials() throws Exception {
-        long matCount = readUnsignedInt();
+        int matCount = readUnsignedInt();
 
         List<MMDMaterial> list = new ArrayList<MMDMaterial>();
 
         System.out.print("Reading Materials...");
 
-        for (long x = 0; x < matCount; x++) {
+        for (int x = 0; x < matCount; x++) {
             MMDMaterial m = new MMDMaterial();
 
             m.setR(readFloat());
@@ -247,7 +248,7 @@ public class MMDImporter implements Runnable {
         }
 
         System.out.println("complete");
-        System.out.println(list.size()+" materials read.");
+        System.out.println(list.size() + " materials read.");
         this.model.setMaterialList(list);
     }
 
@@ -301,7 +302,7 @@ public class MMDImporter implements Runnable {
         List<MMDBone> boneList = this.model.getBoneList();
 
         System.out.print("Reading IK...");
-        for (long x = 0; x < ikCount; x++) {
+        for (int x = 0; x < ikCount; x++) {
             MMDIk k = new MMDIk();
 
             k.setBone(boneList.get(readUnsignedShort()));
@@ -344,9 +345,13 @@ public class MMDImporter implements Runnable {
 
                 d.setIndex(readUnsignedInt());
 
-                List<Vector> vList = readVectorList(3);
+                float vx = readFloat();
+                float vy = readFloat();
+                float vz = readFloat();
 
-                d.setOffset(vList);
+                Vector v = new Vector(vx, vy, vz, 0.0f);
+
+                d.setOffset(v);
 
                 morphData.add(d);
             }
@@ -366,7 +371,7 @@ public class MMDImporter implements Runnable {
         v.setX(readFloat());
         v.setY(readFloat());
         v.setZ(readFloat());
-        v.setA(readFloat());
+        v.setA(0.0f);
 
         return v;
     }
@@ -387,7 +392,7 @@ public class MMDImporter implements Runnable {
 
         int boneListCount = readByte();
 
-        LinkedHashSet<String> groupNames = new LinkedHashSet<String>();
+        List<String> groupNames = new ArrayList<String>();
         for (int x = 0; x < boneListCount; x++) {
             String groupName = readString(50);
 
@@ -406,7 +411,7 @@ public class MMDImporter implements Runnable {
             int boneIndex = readUnsignedShort();
             int displayIndex = readByte();
 
-            String groupName = gNames[displayIndex];
+            String groupName = gNames[displayIndex - 1];
 
             displayBoneGroups.get(groupName).add(boneList.get(boneIndex));
         }
@@ -416,6 +421,7 @@ public class MMDImporter implements Runnable {
         this.model.setDisplayBoneGroups(displayBoneGroups);
     }
 
+    @SuppressWarnings("all")
     private void readExtendedData() throws Exception {
         int engFlag = readByte();
         System.out.print("Reading Extended Data...");
@@ -451,14 +457,14 @@ public class MMDImporter implements Runnable {
     }
 
     private void readRigidBodies() throws Exception {
-        long bodyCount = readUnsignedInt();
+        int bodyCount = readUnsignedInt();
 
         List<MMDRigidBody> list = new ArrayList<MMDRigidBody>();
 
         List<MMDBone> boneList = this.model.getBoneList();
 
         System.out.print("Reading Rigid Bodies...");
-        for (long x = 0; x < bodyCount; x++) {
+        for (int x = 0; x < bodyCount; x++) {
             MMDRigidBody b = new MMDRigidBody();
 
             b.setName(readString(20));
@@ -472,13 +478,13 @@ public class MMDImporter implements Runnable {
             b.setCollisionMaskId(readUnsignedShort());
             b.setShape(readByte());
 
-            List<Vector> size = readVectorList(3);
+            Vector size = readVector();
             b.setSize(size);
 
-            List<Vector> position = readVectorList(3);
+            Vector position = readVector();
             b.setPosition(position);
 
-            List<Vector> rotation = readVectorList(3);
+            Vector rotation = readVector();
             b.setRotation(rotation);
 
             b.setMass(readFloat());
@@ -495,26 +501,15 @@ public class MMDImporter implements Runnable {
         this.model.setRigidBodyList(list);
     }
 
-    private List<Vector> readVectorList(int size) throws Exception {
-        List<Vector> list = new ArrayList<Vector>();
-
-        for (int i = 0; i < size; i++) {
-            Vector v = readVector();
-            list.add(v);
-        }
-
-        return list;
-    }
-
     private void readJoints() throws Exception {
-        long jointCount = readUnsignedInt();
+        int jointCount = readUnsignedInt();
 
         List<MMDJoint> list = new ArrayList<MMDJoint>();
 
         List<MMDRigidBody> rigidBodyList = this.model.getRigidBodyList();
 
         System.out.print("Reading Joints...");
-        for (long x = 0; x < jointCount; x++) {
+        for (int x = 0; x < jointCount; x++) {
             MMDJoint j = new MMDJoint();
 
             j.setName(readString(20));
@@ -523,14 +518,14 @@ public class MMDImporter implements Runnable {
             j.setDestRigidBody(rigidBodyList.get(Long
                     .valueOf(readUnsignedInt()).intValue()));
 
-            j.setLocation(readVectorList(3));
-            j.setRotation(readVectorList(3));
-            j.setMaxLoc(readVectorList(3));
-            j.setMinLoc(readVectorList(3));
-            j.setMaxRot(readVectorList(3));
-            j.setMinRot(readVectorList(3));
-            j.setSpringConst(readVectorList(3));
-            j.setSpringRotConst(readVectorList(3));
+            j.setLocation(readVector());
+            j.setRotation(readVector());
+            j.setMaxLoc(readVector());
+            j.setMinLoc(readVector());
+            j.setMaxRot(readVector());
+            j.setMinRot(readVector());
+            j.setSpringConst(readVector());
+            j.setSpringRotConst(readVector());
 
             list.add(j);
         }

@@ -4,7 +4,6 @@
 package com.cbg.core.geometry.cat;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
@@ -13,10 +12,10 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  * 
  */
-public class MorphData implements Serializable{
+public class MorphData implements Serializable {
     private static final long serialVersionUID = 1L;
-    private long index;
-    private List<Vector> offset;
+    private int index;
+    private Vector offset;
 
     /*
      * (non-Javadoc)
@@ -28,8 +27,8 @@ public class MorphData implements Serializable{
         StringBuilder b = new StringBuilder();
 
         b.append("{");
-        b.append("index:").append(this.index).append(",offset:")
-                .append(StringUtil.serializeJsonList(this.offset));
+        b.append("index:").append(this.index).append(",")
+                .append(StringUtil.jsonParamater("offset", this.offset));
         b.append("}");
 
         return b.toString();
@@ -38,7 +37,7 @@ public class MorphData implements Serializable{
     /**
      * @return the index
      */
-    public long getIndex() {
+    public int getIndex() {
         return index;
     }
 
@@ -46,14 +45,14 @@ public class MorphData implements Serializable{
      * @param index
      *            the index to set
      */
-    public void setIndex(long index) {
+    public void setIndex(int index) {
         this.index = index;
     }
 
     /**
      * @return the offset
      */
-    public List<Vector> getOffset() {
+    public Vector getOffset() {
         return offset;
     }
 
@@ -61,7 +60,7 @@ public class MorphData implements Serializable{
      * @param offset
      *            the offset to set
      */
-    public void setOffset(List<Vector> offset) {
+    public void setOffset(Vector offset) {
         this.offset = offset;
     }
 }

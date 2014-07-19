@@ -1,7 +1,6 @@
 package com.cbg.core.geometry.cat;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
@@ -14,9 +13,9 @@ public class RigidBody implements Serializable{
     private int collisionMaskId;
     private String shape;
 
-    private List<Vector> size;
-    private List<Vector> position;
-    private List<Vector> rotation;
+    private Vector size;
+    private Vector position;
+    private Vector rotation;
 
     private float mass;
     private float velocityAtt;
@@ -136,45 +135,42 @@ public class RigidBody implements Serializable{
     /**
      * @return the size
      */
-    public List<Vector> getSize() {
+    public Vector getSize() {
         return size;
     }
 
     /**
-     * @param size
-     *            the size to set
+     * @param size the size to set
      */
-    public void setSize(List<Vector> size) {
+    public void setSize(Vector size) {
         this.size = size;
     }
 
     /**
      * @return the position
      */
-    public List<Vector> getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
     /**
-     * @param position
-     *            the position to set
+     * @param position the position to set
      */
-    public void setPosition(List<Vector> position) {
+    public void setPosition(Vector position) {
         this.position = position;
     }
 
     /**
      * @return the rotation
      */
-    public List<Vector> getRotation() {
+    public Vector getRotation() {
         return rotation;
     }
 
     /**
-     * @param rotation
-     *            the rotation to set
+     * @param rotation the rotation to set
      */
-    public void setRotation(List<Vector> rotation) {
+    public void setRotation(Vector rotation) {
         this.rotation = rotation;
     }
 

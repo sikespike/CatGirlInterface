@@ -10,9 +10,9 @@ public class StringUtil {
     }
 
     public static String jsonWrapString(String text) {
-        return wrapString(text,"\"");
+        return wrapString(text, "\"");
     }
-    
+
     public static String serializeList(List<?> list) {
         StringBuilder b = new StringBuilder();
 
@@ -28,43 +28,46 @@ public class StringUtil {
 
         return b.toString();
     }
-    
+
     public static String serializeJsonList(List<?> list) {
         StringBuilder b = new StringBuilder();
-        
+
         b.append("[").append(serializeList(list)).append("]");
-        
+
         return b.toString();
     }
-    
-    public static String implodeJson(List<String> list){
+
+    public static String implodeJson(List<String> list) {
         return implodeJson(list.toArray(new String[list.size()]));
     }
-    
-    public static String implodeJson(String[] list){
+
+    public static String implodeJson(String[] list) {
         StringBuilder b = new StringBuilder();
-        
+
         b.append("[");
-        
-        for (int x=0;x<list.length;x++) {
-            b.append(wrapString(list[x],"\""));
+
+        for (int x = 0; x < list.length; x++) {
+            b.append(wrapString(list[x], "\""));
 
             if (x + 1 != list.length) {
                 b.append(",");
             }
         }
-        
+
         b.append("]");
-        
+
         return b.toString();
     }
-    
+
+    @SuppressWarnings("all")
     public static String jsonParamater(String name, Object item){
         StringBuilder b = new StringBuilder();
         
         b.append(name).append(":");
         
-        if(item instanceof String){
+        if(item == null){
+            b.append(jsonWrapString("null"));
+        } else if(item instanceof String){
             b.append(jsonWrapString((String)item));
         } else if(item instanceof List<?>){
             try{

@@ -1,7 +1,5 @@
 package com.cbg.core.geometry.mmd;
 
-import java.util.List;
-
 import com.cbg.core.geometry.Vector;
 
 public class MMDRigidBody {
@@ -11,10 +9,10 @@ public class MMDRigidBody {
     private int collisionGroupId;
     private int collisionMaskId;
     private int shape;
-    
-    private List<Vector> size;
-    private List<Vector> position;
-    private List<Vector> rotation;
+
+    private Vector size;
+    private Vector position;
+    private Vector rotation;
 
     private float mass;
     private float velocityAtt;
@@ -32,7 +30,8 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param index the index to set
+     * @param index
+     *            the index to set
      */
     public void setIndex(int index) {
         this.index = index;
@@ -116,42 +115,45 @@ public class MMDRigidBody {
     /**
      * @return the size
      */
-    public List<Vector> getSize() {
+    public Vector getSize() {
         return size;
     }
 
     /**
-     * @param size the size to set
+     * @param size
+     *            the size to set
      */
-    public void setSize(List<Vector> size) {
+    public void setSize(Vector size) {
         this.size = size;
     }
 
     /**
      * @return the position
      */
-    public List<Vector> getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
     /**
-     * @param position the position to set
+     * @param position
+     *            the position to set
      */
-    public void setPosition(List<Vector> position) {
+    public void setPosition(Vector position) {
         this.position = position;
     }
 
     /**
      * @return the rotation
      */
-    public List<Vector> getRotation() {
+    public Vector getRotation() {
         return rotation;
     }
 
     /**
-     * @param rotation the rotation to set
+     * @param rotation
+     *            the rotation to set
      */
-    public void setRotation(List<Vector> rotation) {
+    public void setRotation(Vector rotation) {
         this.rotation = rotation;
     }
 
@@ -178,7 +180,8 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param velocityAtt the velocityAtt to set
+     * @param velocityAtt
+     *            the velocityAtt to set
      */
     public void setVelocityAtt(float velocityAtt) {
         this.velocityAtt = velocityAtt;
@@ -192,7 +195,8 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param rotationAtt the rotationAtt to set
+     * @param rotationAtt
+     *            the rotationAtt to set
      */
     public void setRotationAtt(float rotationAtt) {
         this.rotationAtt = rotationAtt;
@@ -206,7 +210,8 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param bounce the bounce to set
+     * @param bounce
+     *            the bounce to set
      */
     public void setBounce(float bounce) {
         this.bounce = bounce;
@@ -235,7 +240,8 @@ public class MMDRigidBody {
     }
 
     /**
-     * @param mode the mode to set
+     * @param mode
+     *            the mode to set
      */
     public void setMode(int mode) {
         this.mode = mode;

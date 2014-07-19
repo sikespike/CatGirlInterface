@@ -13,9 +13,9 @@ import com.cbg.core.util.StringUtil;
  * 
  */
 
-public class Bone implements Serializable{
+public class Bone implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private String name;
     private Bone parent;
     private Bone child;
@@ -28,13 +28,21 @@ public class Bone implements Serializable{
     public String toString() {
         StringBuilder b = new StringBuilder();
 
+        String parentName = this.parent != null ? this.parent.getName()
+                : "null";
+        String childName = this.parent != null ? this.parent.getName() : "null";
+        String targetName = this.parent != null ? this.parent.getName()
+                : "null";
+
         b.append("{");
-        b.append(StringUtil.jsonParamater("name", this.name))
-                .append(",").append(StringUtil.jsonParamater("parentBone", this.parent))
-                .append(",").append(StringUtil.jsonParamater("childBone", this.child))
-                .append(",type:").append(this.type)
-                .append(",").append(StringUtil.jsonParamater("targetBone", this.target))
-                .append(",").append(StringUtil.jsonParamater("position", this.position));
+        b.append(StringUtil.jsonParamater("name", this.name)).append(",")
+                .append(StringUtil.jsonParamater("parentBone", parentName))
+                .append(",")
+                .append(StringUtil.jsonParamater("childBone", childName))
+                .append(",type:").append(this.type).append(",")
+                .append(StringUtil.jsonParamater("targetBone", targetName))
+                .append(",")
+                .append(StringUtil.jsonParamater("position", this.position));
         b.append("}");
 
         return b.toString();

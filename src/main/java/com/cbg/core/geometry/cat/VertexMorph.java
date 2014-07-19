@@ -12,7 +12,7 @@ import com.cbg.core.util.StringUtil;
  * @author Siebe
  * 
  */
-public class VertexMorph implements Serializable{
+public class VertexMorph implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private int type;
@@ -30,7 +30,7 @@ public class VertexMorph implements Serializable{
         b.append("{");
 
         b.append(StringUtil.jsonParamater("name", this.name)).append(",type:")
-                .append(this.type)
+                .append(this.type).append(",")
                 .append(StringUtil.jsonParamater("data", this.data));
 
         b.append("}");

@@ -3,8 +3,6 @@
  */
 package com.cbg.core.geometry.mmd;
 
-import java.util.List;
-
 import com.cbg.core.geometry.Vector;
 
 /**
@@ -12,30 +10,30 @@ import com.cbg.core.geometry.Vector;
  *
  */
 public class MMDMorphData {
-    private long index;
-    private List<Vector> offset;
+    private int index;
+    private Vector offset;
     /**
      * @return the index
      */
-    public long getIndex() {
+    public int getIndex() {
         return index;
     }
     /**
      * @param index the index to set
      */
-    public void setIndex(long index) {
+    public void setIndex(int index) {
         this.index = index;
     }
     /**
      * @return the offset
      */
-    public List<Vector> getOffset() {
+    public Vector getOffset() {
         return offset;
     }
     /**
      * @param offset the offset to set
      */
-    public void setOffset(List<Vector> offset) {
+    public void setOffset(Vector offset) {
         this.offset = offset;
     }
 }

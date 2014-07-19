@@ -3,8 +3,6 @@
  */
 package com.cbg.core.geometry.mmd;
 
-import java.util.List;
-
 import com.cbg.core.geometry.Vector;
 
 /**
@@ -15,14 +13,14 @@ public class MMDJoint {
     private String name;
     private MMDRigidBody sourceRigidBody;
     private MMDRigidBody destRigidBody;
-    private List<Vector> location;
-    private List<Vector> rotation;
-    private List<Vector> minLoc;
-    private List<Vector> maxLoc;
-    private List<Vector> minRot;
-    private List<Vector> maxRot;
-    private List<Vector> springConst;
-    private List<Vector> springRotConst;
+    private Vector location;
+    private Vector rotation;
+    private Vector minLoc;
+    private Vector maxLoc;
+    private Vector minRot;
+    private Vector maxRot;
+    private Vector springConst;
+    private Vector springRotConst;
 
     /**
      * @return the name
@@ -70,7 +68,7 @@ public class MMDJoint {
     /**
      * @return the location
      */
-    public List<Vector> getLocation() {
+    public Vector getLocation() {
         return location;
     }
 
@@ -78,14 +76,14 @@ public class MMDJoint {
      * @param location
      *            the location to set
      */
-    public void setLocation(List<Vector> location) {
+    public void setLocation(Vector location) {
         this.location = location;
     }
 
     /**
      * @return the rotation
      */
-    public List<Vector> getRotation() {
+    public Vector getRotation() {
         return rotation;
     }
 
@@ -93,14 +91,14 @@ public class MMDJoint {
      * @param rotation
      *            the rotation to set
      */
-    public void setRotation(List<Vector> rotation) {
+    public void setRotation(Vector rotation) {
         this.rotation = rotation;
     }
 
     /**
      * @return the minLoc
      */
-    public List<Vector> getMinLoc() {
+    public Vector getMinLoc() {
         return minLoc;
     }
 
@@ -108,14 +106,14 @@ public class MMDJoint {
      * @param minLoc
      *            the minLoc to set
      */
-    public void setMinLoc(List<Vector> minLoc) {
+    public void setMinLoc(Vector minLoc) {
         this.minLoc = minLoc;
     }
 
     /**
      * @return the maxLoc
      */
-    public List<Vector> getMaxLoc() {
+    public Vector getMaxLoc() {
         return maxLoc;
     }
 
@@ -123,14 +121,14 @@ public class MMDJoint {
      * @param maxLoc
      *            the maxLoc to set
      */
-    public void setMaxLoc(List<Vector> maxLoc) {
+    public void setMaxLoc(Vector maxLoc) {
         this.maxLoc = maxLoc;
     }
 
     /**
      * @return the minRot
      */
-    public List<Vector> getMinRot() {
+    public Vector getMinRot() {
         return minRot;
     }
 
@@ -138,14 +136,14 @@ public class MMDJoint {
      * @param minRot
      *            the minRot to set
      */
-    public void setMinRot(List<Vector> minRot) {
+    public void setMinRot(Vector minRot) {
         this.minRot = minRot;
     }
 
     /**
      * @return the maxRot
      */
-    public List<Vector> getMaxRot() {
+    public Vector getMaxRot() {
         return maxRot;
     }
 
@@ -153,14 +151,14 @@ public class MMDJoint {
      * @param maxRot
      *            the maxRot to set
      */
-    public void setMaxRot(List<Vector> maxRot) {
+    public void setMaxRot(Vector maxRot) {
         this.maxRot = maxRot;
     }
 
     /**
      * @return the springConst
      */
-    public List<Vector> getSpringConst() {
+    public Vector getSpringConst() {
         return springConst;
     }
 
@@ -168,14 +166,14 @@ public class MMDJoint {
      * @param springConst
      *            the springConst to set
      */
-    public void setSpringConst(List<Vector> springConst) {
+    public void setSpringConst(Vector springConst) {
         this.springConst = springConst;
     }
 
     /**
      * @return the springRotConst
      */
-    public List<Vector> getSpringRotConst() {
+    public Vector getSpringRotConst() {
         return springRotConst;
     }
 
@@ -183,7 +181,7 @@ public class MMDJoint {
      * @param springRotConst
      *            the springRotConst to set
      */
-    public void setSpringRotConst(List<Vector> springRotConst) {
+    public void setSpringRotConst(Vector springRotConst) {
         this.springRotConst = springRotConst;
     }
 }

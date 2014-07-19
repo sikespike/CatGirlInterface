@@ -4,7 +4,6 @@
 package com.cbg.core.geometry.cat;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
@@ -18,14 +17,14 @@ public class Joint implements Serializable{
     private String name;
     private RigidBody sourceRigidBody;
     private RigidBody destRigidBody;
-    private List<Vector> location;
-    private List<Vector> rotation;
-    private List<Vector> minLoc;
-    private List<Vector> maxLoc;
-    private List<Vector> minRot;
-    private List<Vector> maxRot;
-    private List<Vector> springConst;
-    private List<Vector> springRotConst;
+    private Vector location;
+    private Vector rotation;
+    private Vector minLoc;
+    private Vector maxLoc;
+    private Vector minRot;
+    private Vector maxRot;
+    private Vector springConst;
+    private Vector springRotConst;
 
     /*
      * (non-Javadoc)
@@ -114,7 +113,7 @@ public class Joint implements Serializable{
     /**
      * @return the location
      */
-    public List<Vector> getLocation() {
+    public Vector getLocation() {
         return location;
     }
 
@@ -122,14 +121,14 @@ public class Joint implements Serializable{
      * @param location
      *            the location to set
      */
-    public void setLocation(List<Vector> location) {
+    public void setLocation(Vector location) {
         this.location = location;
     }
 
     /**
      * @return the rotation
      */
-    public List<Vector> getRotation() {
+    public Vector getRotation() {
         return rotation;
     }
 
@@ -137,14 +136,14 @@ public class Joint implements Serializable{
      * @param rotation
      *            the rotation to set
      */
-    public void setRotation(List<Vector> rotation) {
+    public void setRotation(Vector rotation) {
         this.rotation = rotation;
     }
 
     /**
      * @return the minLoc
      */
-    public List<Vector> getMinLoc() {
+    public Vector getMinLoc() {
         return minLoc;
     }
 
@@ -152,14 +151,14 @@ public class Joint implements Serializable{
      * @param minLoc
      *            the minLoc to set
      */
-    public void setMinLoc(List<Vector> minLoc) {
+    public void setMinLoc(Vector minLoc) {
         this.minLoc = minLoc;
     }
 
     /**
      * @return the maxLoc
      */
-    public List<Vector> getMaxLoc() {
+    public Vector getMaxLoc() {
         return maxLoc;
     }
 
@@ -167,14 +166,14 @@ public class Joint implements Serializable{
      * @param maxLoc
      *            the maxLoc to set
      */
-    public void setMaxLoc(List<Vector> maxLoc) {
+    public void setMaxLoc(Vector maxLoc) {
         this.maxLoc = maxLoc;
     }
 
     /**
      * @return the minRot
      */
-    public List<Vector> getMinRot() {
+    public Vector getMinRot() {
         return minRot;
     }
 
@@ -182,14 +181,14 @@ public class Joint implements Serializable{
      * @param minRot
      *            the minRot to set
      */
-    public void setMinRot(List<Vector> minRot) {
+    public void setMinRot(Vector minRot) {
         this.minRot = minRot;
     }
 
     /**
      * @return the maxRot
      */
-    public List<Vector> getMaxRot() {
+    public Vector getMaxRot() {
         return maxRot;
     }
 
@@ -197,14 +196,14 @@ public class Joint implements Serializable{
      * @param maxRot
      *            the maxRot to set
      */
-    public void setMaxRot(List<Vector> maxRot) {
+    public void setMaxRot(Vector maxRot) {
         this.maxRot = maxRot;
     }
 
     /**
      * @return the springConst
      */
-    public List<Vector> getSpringConst() {
+    public Vector getSpringConst() {
         return springConst;
     }
 
@@ -212,14 +211,14 @@ public class Joint implements Serializable{
      * @param springConst
      *            the springConst to set
      */
-    public void setSpringConst(List<Vector> springConst) {
+    public void setSpringConst(Vector springConst) {
         this.springConst = springConst;
     }
 
     /**
      * @return the springRotConst
      */
-    public List<Vector> getSpringRotConst() {
+    public Vector getSpringRotConst() {
         return springRotConst;
     }
 
@@ -227,7 +226,7 @@ public class Joint implements Serializable{
      * @param springRotConst
      *            the springRotConst to set
      */
-    public void setSpringRotConst(List<Vector> springRotConst) {
+    public void setSpringRotConst(Vector springRotConst) {
         this.springRotConst = springRotConst;
     }
 }

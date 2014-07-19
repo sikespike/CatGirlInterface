@@ -15,21 +15,25 @@ import com.cbg.core.geometry.cat.Bone;
 import com.cbg.core.geometry.cat.DisplayBoneGroupList;
 import com.cbg.core.geometry.cat.Joint;
 import com.cbg.core.geometry.cat.Material;
+import com.cbg.core.geometry.cat.MorphData;
 import com.cbg.core.geometry.cat.Motion;
 import com.cbg.core.geometry.cat.RigidBody;
 import com.cbg.core.geometry.cat.Triangle;
 import com.cbg.core.geometry.cat.Vertex;
+import com.cbg.core.geometry.cat.VertexMorph;
 import com.cbg.core.geometry.mmd.MMDBone;
 import com.cbg.core.geometry.mmd.MMDIk;
 import com.cbg.core.geometry.mmd.MMDJoint;
 import com.cbg.core.geometry.mmd.MMDMaterial;
+import com.cbg.core.geometry.mmd.MMDMorphData;
 import com.cbg.core.geometry.mmd.MMDRigidBody;
 import com.cbg.core.geometry.mmd.MMDTriangle;
 import com.cbg.core.geometry.mmd.MMDVertex;
+import com.cbg.core.geometry.mmd.MMDVertexMorph;
 
 /**
  * @author Siebe
- *
+ * 
  */
 public class MMDtoCATTransformer implements Runnable {
     private MMDModel mmdModel;
@@ -50,16 +54,51 @@ public class MMDtoCATTransformer implements Runnable {
         setBones();
         setPolygons();
         setMotions();
+        setMorphs();
         setDisplayBoneGroupList();
         setToonTextureList();
         setRigidBodyList();
         setJointList();
     }
 
+    private void setMorphs(){
+        List<MMDVertexMorph> vertexMorphs = this.mmdModel.getVertexMorphList();
+        List<VertexMorph> morphs = new ArrayList<VertexMorph>();
+        
+        System.out.print("Setting Materials...");
+        
+        for(MMDVertexMorph mmdvm:vertexMorphs){
+            VertexMorph vm = new VertexMorph();
+            
+            vm.setName(mmdvm.getName());
+            vm.setType(mmdvm.getType());
+            
+            List<MorphData> mdList = new ArrayList<MorphData>();
+            
+            List<MMDMorphData> mmdmdList = mmdvm.getMorphData();
+            for(MMDMorphData mmdmd:mmdmdList){
+                MorphData md = new MorphData();
+                
+                md.setIndex(mmdmd.getIndex());
+                md.setOffset(mmdmd.getOffset());
+                
+                mdList.add(md);
+            }
+            
+            vm.setData(mdList);
+            
+            morphs.add(vm);
+        }
+        
+        System.out.println("complete");
+        this.catModel.setVertexMorphList(morphs);
+    }
+    
     private void setMaterials() {
         List<MMDMaterial> materialList = this.mmdModel.getMaterialList();
         List<Material> materials = new ArrayList<Material>();
 
+        System.out.print("Setting Materials...");
         for (MMDMaterial mmdm : materialList) {
             Material m = new Material();
 
@@ -82,7 +121,7 @@ public class MMDtoCATTransformer implements Runnable {
 
             materials.add(m);
         }
-
+        System.out.println("complete");
         this.catModel.setMaterials(materials);
     }
 
@@ -91,6 +130,7 @@ public class MMDtoCATTransformer implements Runnable {
         List<Triangle> polyList = new ArrayList<Triangle>();
         List<Bone> boneList = this.catModel.getBones();
 
+        System.out.print("Setting Polygons...");
         for (MMDTriangle mmdt : triangleList) {
             Triangle t = new Triangle();
 
@@ -121,36 +161,50 @@ public class MMDtoCATTransformer implements Runnable {
             polyList.add(t);
         }
 
+        System.out.println("complete");
         this.catModel.setPolygons(polyList);
     }
 
     private void setBones() {
         List<MMDBone> mmdBoneList = this.mmdModel.getBoneList();
         List<Bone> boneList = new ArrayList<Bone>();
-        
-        for(MMDBone mmdb:mmdBoneList){
+
+        System.out.print("Setting Bones...");
+        for (MMDBone mmdb : mmdBoneList) {
             Bone b = new Bone();
-            
+
             b.setName(mmdb.getName());
             b.setType(mmdb.getBoneType());
-            
-            Vector position = new Vector(mmdb.getX(), mmdb.getY(),
-                    mmdb.getZ(), 0.0f);
-            
+
+            Vector position = new Vector(mmdb.getX(), mmdb.getY(), mmdb.getZ(),
+                    0.0f);
+
             b.setPosition(position);
-            
+
             boneList.add(b);
         }
-        
-        for(int x=0;x<mmdBoneList.size();x++){
+
+        for (int x = 0; x < mmdBoneList.size(); x++) {
             MMDBone mmdb = mmdBoneList.get(x);
             Bone b = boneList.get(x);
-            
-            b.setParent(boneList.get(mmdb.getParentBoneIndex()));
-            b.setChild(boneList.get(mmdb.getChildBoneIndex()));
-            b.setTarget(boneList.get(mmdb.getTargetBoneIndex()));
+
+            int parentBoneIndex = mmdb.getParentBoneIndex();
+            Bone parentBone = parentBoneIndex != -1 ? boneList
+                    .get(parentBoneIndex) : null;
+            b.setParent(parentBone);
+
+            int childBoneIndex = mmdb.getChildBoneIndex();
+            Bone childBone = childBoneIndex != -1 ? boneList
+                    .get(childBoneIndex) : null;
+            b.setChild(childBone);
+
+            int targetBoneIndex = mmdb.getTargetBoneIndex();
+            Bone targetBone = targetBoneIndex != -1 ? boneList
+                    .get(targetBoneIndex) : null;
+            b.setTarget(targetBone);
         }
-        
+
+        System.out.println("complete");
         this.catModel.setBones(boneList);
     }
 
@@ -158,47 +212,52 @@ public class MMDtoCATTransformer implements Runnable {
         List<MMDIk> ikList = this.mmdModel.getIkList();
         List<Motion> motionList = new ArrayList<Motion>();
         List<Bone> boneList = this.catModel.getBones();
-        
-        for(MMDIk mmdik:ikList){
+
+        System.out.print("Setting Motions...");
+        for (MMDIk mmdik : ikList) {
             Motion m = new Motion();
-            
+
             m.setBone(boneList.get(mmdik.getBone().getIndex()));
             m.setTargetBone(boneList.get(mmdik.getTargetBone().getIndex()));
             m.setLinks(mmdik.getNumLinks());
             m.setIteration(mmdik.getItCount());
             m.setMaxAngle(mmdik.getMaxAngle());
-            
+
             List<Bone> childBones = new ArrayList<Bone>();
-            
-            for(MMDBone mmdb :mmdik.getChildBoneList()){
+
+            for (MMDBone mmdb : mmdik.getChildBoneList()) {
                 childBones.add(boneList.get(mmdb.getIndex()));
             }
-            
+
             m.setChildBones(childBones);
-            
+
             motionList.add(m);
         }
-        
+
+        System.out.println("complete");
         this.catModel.setMotions(motionList);
     }
 
     private void setDisplayBoneGroupList() {
-        Map<String, List<MMDBone>> displayBoneGroups = this.mmdModel.getDisplayBoneGroups();
+        Map<String, List<MMDBone>> displayBoneGroups = this.mmdModel
+                .getDisplayBoneGroups();
         DisplayBoneGroupList groupList = new DisplayBoneGroupList();
         List<Bone> boneList = this.catModel.getBones();
-        
-        for(String key:displayBoneGroups.keySet()){
+
+        System.out.print("Setting Display Bone Groups...");
+        for (String key : displayBoneGroups.keySet()) {
             List<MMDBone> mmdBones = displayBoneGroups.get(key);
-            
+
             List<Bone> bones = new ArrayList<Bone>();
-            
-            for(MMDBone mmdb:mmdBones){
+
+            for (MMDBone mmdb : mmdBones) {
                 bones.add(boneList.get(mmdb.getIndex()));
             }
-            
+
             groupList.put(key, bones);
         }
-        
+
+        System.out.println("complete");
         this.catModel.setDisplayBoneGroups(groupList);
     }
 
@@ -210,49 +269,54 @@ public class MMDtoCATTransformer implements Runnable {
         List<MMDRigidBody> mmdRigidBodyList = this.mmdModel.getRigidBodyList();
         List<RigidBody> rigidBodyList = new ArrayList<RigidBody>();
         List<Bone> boneList = this.catModel.getBones();
-        
-        String[] types = {"sphere","box","capsule"};
-        String[] modes = {"static","dynamic","bone"};
-        
-        for(MMDRigidBody mmdr:mmdRigidBodyList){
+
+        String[] types = { "sphere", "box", "capsule" };
+        String[] modes = { "static", "dynamic", "bone" };
+
+        System.out.print("Setting Rigid Bodies...");
+        for (MMDRigidBody mmdr : mmdRigidBodyList) {
             RigidBody r = new RigidBody();
-            
+
             r.setName(mmdr.getName());
             r.setBone(boneList.get(mmdr.getBone().getIndex()));
             r.setCollisionGroupId(mmdr.getCollisionGroupId());
             r.setCollisionMaskId(mmdr.getCollisionMaskId());
             r.setShape(types[mmdr.getShape()]);
-            
+
             r.setSize(mmdr.getSize());
             r.setPosition(mmdr.getPosition());
             r.setRotation(mmdr.getRotation());
-            
+
             r.setMass(mmdr.getMass());
             r.setVelocityAtt(mmdr.getVelocityAtt());
             r.setRotationAtt(mmdr.getRotationAtt());
             r.setBounce(mmdr.getBounce());
             r.setFriction(mmdr.getFriction());
-            
+
             r.setMode(modes[mmdr.getMode()]);
-            
+
             rigidBodyList.add(r);
         }
-        
+
+        System.out.println("complete");
         this.catModel.setRigidBodyList(rigidBodyList);
     }
 
     private void setJointList() {
         List<MMDJoint> jointList = this.mmdModel.getJointList();
         List<RigidBody> rigidBodyList = this.catModel.getRigidBodyList();
-        
+
         List<Joint> joints = new ArrayList<Joint>();
-        
-        for(MMDJoint mmdj:jointList){
+
+        System.out.print("Setting Joints...");
+        for (MMDJoint mmdj : jointList) {
             Joint j = new Joint();
-            
+
             j.setName(mmdj.getName());
-            j.setSourceRigidBody(rigidBodyList.get(mmdj.getSourceRigidBody().getIndex()));
-            j.setDestRigidBody(rigidBodyList.get(mmdj.getDestRigidBody().getIndex()));
+            j.setSourceRigidBody(rigidBodyList.get(mmdj.getSourceRigidBody()
+                    .getIndex()));
+            j.setDestRigidBody(rigidBodyList.get(mmdj.getDestRigidBody()
+                    .getIndex()));
             j.setLocation(mmdj.getLocation());
             j.setRotation(mmdj.getRotation());
             j.setMinLoc(mmdj.getMinLoc());
@@ -261,10 +325,11 @@ public class MMDtoCATTransformer implements Runnable {
             j.setMaxRot(mmdj.getMaxRot());
             j.setSpringConst(mmdj.getSpringConst());
             j.setSpringRotConst(mmdj.getSpringRotConst());
-            
+
             joints.add(j);
         }
-        
+
+        System.out.println("complete");
         this.catModel.setJointList(joints);
     }
 
