@@ -4,10 +4,11 @@
 package com.cbg.core.geometry.cat;
 
 import com.cbg.core.geometry.Vector;
+import com.cbg.core.util.StringUtil;
 
 /**
  * @author Siebe
- *
+ * 
  */
 public class Bone {
     private String name;
@@ -15,8 +16,24 @@ public class Bone {
     private Bone child;
     private int type;
     private Bone target;
-    
+
     private Vector position;
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+
+        b.append("{");
+        b.append(StringUtil.jsonParamater("name", this.name))
+                .append(",").append(StringUtil.jsonParamater("parentBone", this.parent))
+                .append(",").append(StringUtil.jsonParamater("childBone", this.child))
+                .append(",type:").append(this.type)
+                .append(",").append(StringUtil.jsonParamater("targetBone", this.target))
+                .append(",").append(StringUtil.jsonParamater("position", this.position));
+        b.append("}");
+
+        return b.toString();
+    }
 
     /**
      * @return the name
@@ -26,7 +43,8 @@ public class Bone {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -40,7 +58,8 @@ public class Bone {
     }
 
     /**
-     * @param parent the parent to set
+     * @param parent
+     *            the parent to set
      */
     public void setParent(Bone parent) {
         this.parent = parent;
@@ -54,7 +73,8 @@ public class Bone {
     }
 
     /**
-     * @param child the child to set
+     * @param child
+     *            the child to set
      */
     public void setChild(Bone child) {
         this.child = child;
@@ -68,7 +88,8 @@ public class Bone {
     }
 
     /**
-     * @param type the type to set
+     * @param type
+     *            the type to set
      */
     public void setType(int type) {
         this.type = type;
@@ -82,7 +103,8 @@ public class Bone {
     }
 
     /**
-     * @param target the target to set
+     * @param target
+     *            the target to set
      */
     public void setTarget(Bone target) {
         this.target = target;
@@ -96,7 +118,8 @@ public class Bone {
     }
 
     /**
-     * @param position the position to set
+     * @param position
+     *            the position to set
      */
     public void setPosition(Vector position) {
         this.position = position;

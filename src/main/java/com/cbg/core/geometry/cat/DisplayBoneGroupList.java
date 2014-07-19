@@ -31,15 +31,23 @@ public class DisplayBoneGroupList {
     public String toString(){
         StringBuilder b = new StringBuilder();
         
-        b.append("{");
+        b.append("{[");
         int size = this.keys.size();
         int x=0;
         for(String key:this.keys){
             
-            b.append("{groupName:").append(StringUtil.wrapString(key, "\""));
-            b.append(",groupBones:[");
+            b.append("{");
+            b.append(StringUtil.jsonParamater("groupName", key));
+            b.append(",");
             
+            List<Bone> bones = this.groups.get(key);
             
+            List<String> boneNames = new ArrayList<String>();
+            for(int i=0;i<bones.size();i++){
+                boneNames.add(bones.get(i).getName());
+            }
+            
+            b.append(StringUtil.jsonParamater("groupBones", boneNames)).append("}");
             
             if(x+1 != size){
                 b.append(",");
@@ -47,7 +55,7 @@ public class DisplayBoneGroupList {
             x++;
         }
         
-        b.append("{");
+        b.append("]}");
         return b.toString();
     }
     

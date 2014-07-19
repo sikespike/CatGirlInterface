@@ -3,14 +3,15 @@ package com.cbg.core.geometry.cat;
 import java.util.List;
 
 import com.cbg.core.geometry.Vector;
+import com.cbg.core.util.StringUtil;
 
 public class RigidBody {
     private String name;
     private Bone bone;
     private int collisionGroupId;
     private int collisionMaskId;
-    private int shape;
-    
+    private String shape;
+
     private List<Vector> size;
     private List<Vector> position;
     private List<Vector> rotation;
@@ -23,6 +24,38 @@ public class RigidBody {
 
     private int mode;
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+
+        b.append("{");
+        b.append(StringUtil.jsonParamater("name", this.name)).append(",")
+                .append(StringUtil.jsonParamater("bone", this.bone.getName()))
+                .append(",").append("collisionGroupId:")
+                .append(this.collisionGroupId).append(",collsionMaskId:")
+                .append(this.collisionMaskId)
+                .append(StringUtil.jsonParamater("shape", this.shape))
+                .append(",")
+                .append(StringUtil.jsonParamater("size", this.size))
+                .append(",")
+                .append(StringUtil.jsonParamater("position", this.position))
+                .append(",")
+                .append(StringUtil.jsonParamater("rotation", this.rotation))
+                .append(",mass:").append(this.mass).append(",velocityAtt:")
+                .append(this.velocityAtt).append(",rotationAtt:")
+                .append(this.rotationAtt).append(",bounce:")
+                .append(this.bounce).append(",friction:").append(this.friction)
+                .append(",mode:").append(this.mode);
+        b.append("}");
+
+        return b.toString();
+    }
+
     /**
      * @return the name
      */
@@ -31,7 +64,8 @@ public class RigidBody {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -45,7 +79,8 @@ public class RigidBody {
     }
 
     /**
-     * @param bone the bone to set
+     * @param bone
+     *            the bone to set
      */
     public void setBone(Bone bone) {
         this.bone = bone;
@@ -59,7 +94,8 @@ public class RigidBody {
     }
 
     /**
-     * @param collisionGroupId the collisionGroupId to set
+     * @param collisionGroupId
+     *            the collisionGroupId to set
      */
     public void setCollisionGroupId(int collisionGroupId) {
         this.collisionGroupId = collisionGroupId;
@@ -73,7 +109,8 @@ public class RigidBody {
     }
 
     /**
-     * @param collisionMaskId the collisionMaskId to set
+     * @param collisionMaskId
+     *            the collisionMaskId to set
      */
     public void setCollisionMaskId(int collisionMaskId) {
         this.collisionMaskId = collisionMaskId;
@@ -82,14 +119,15 @@ public class RigidBody {
     /**
      * @return the shape
      */
-    public int getShape() {
+    public String getShape() {
         return shape;
     }
 
     /**
-     * @param shape the shape to set
+     * @param shape
+     *            the shape to set
      */
-    public void setShape(int shape) {
+    public void setShape(String shape) {
         this.shape = shape;
     }
 
@@ -101,7 +139,8 @@ public class RigidBody {
     }
 
     /**
-     * @param size the size to set
+     * @param size
+     *            the size to set
      */
     public void setSize(List<Vector> size) {
         this.size = size;
@@ -115,7 +154,8 @@ public class RigidBody {
     }
 
     /**
-     * @param position the position to set
+     * @param position
+     *            the position to set
      */
     public void setPosition(List<Vector> position) {
         this.position = position;
@@ -129,7 +169,8 @@ public class RigidBody {
     }
 
     /**
-     * @param rotation the rotation to set
+     * @param rotation
+     *            the rotation to set
      */
     public void setRotation(List<Vector> rotation) {
         this.rotation = rotation;
@@ -143,7 +184,8 @@ public class RigidBody {
     }
 
     /**
-     * @param mass the mass to set
+     * @param mass
+     *            the mass to set
      */
     public void setMass(float mass) {
         this.mass = mass;
@@ -157,7 +199,8 @@ public class RigidBody {
     }
 
     /**
-     * @param velocityAtt the velocityAtt to set
+     * @param velocityAtt
+     *            the velocityAtt to set
      */
     public void setVelocityAtt(float velocityAtt) {
         this.velocityAtt = velocityAtt;
@@ -171,7 +214,8 @@ public class RigidBody {
     }
 
     /**
-     * @param rotationAtt the rotationAtt to set
+     * @param rotationAtt
+     *            the rotationAtt to set
      */
     public void setRotationAtt(float rotationAtt) {
         this.rotationAtt = rotationAtt;
@@ -185,7 +229,8 @@ public class RigidBody {
     }
 
     /**
-     * @param bounce the bounce to set
+     * @param bounce
+     *            the bounce to set
      */
     public void setBounce(float bounce) {
         this.bounce = bounce;
@@ -199,7 +244,8 @@ public class RigidBody {
     }
 
     /**
-     * @param friction the friction to set
+     * @param friction
+     *            the friction to set
      */
     public void setFriction(float friction) {
         this.friction = friction;
@@ -213,7 +259,8 @@ public class RigidBody {
     }
 
     /**
-     * @param mode the mode to set
+     * @param mode
+     *            the mode to set
      */
     public void setMode(int mode) {
         this.mode = mode;

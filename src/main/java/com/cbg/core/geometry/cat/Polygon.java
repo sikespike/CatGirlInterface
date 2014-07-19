@@ -6,6 +6,8 @@ package com.cbg.core.geometry.cat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cbg.core.util.StringUtil;
+
 /**
  * @author Siebe
  *
@@ -47,17 +49,9 @@ public abstract class Polygon {
     public String toString(){
         StringBuilder b = new StringBuilder();
         
-        b.append("{polygon:[");
-        for(int x=0;x<this.verts.size();x++){
-            Vertex v = this.verts.get(x);
-            
-            b.append(v.toString());
-            
-            if(x+1 != this.verts.size()){
-                b.append(",");
-            }
-        }
-        b.append("]}");
+        b.append("{polygon:");
+        b.append(StringUtil.serializeJsonList(this.verts));
+        b.append("}");
         
         return b.toString();
     }
