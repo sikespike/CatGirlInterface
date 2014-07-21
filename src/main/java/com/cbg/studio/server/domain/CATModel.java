@@ -1,19 +1,21 @@
 /**
  * 
  */
-package com.cbg.core.data.cat;
+package com.cbg.studio.server.domain;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import com.cbg.core.geometry.cat.Bone;
-import com.cbg.core.geometry.cat.DisplayBoneGroupList;
-import com.cbg.core.geometry.cat.Joint;
-import com.cbg.core.geometry.cat.Material;
-import com.cbg.core.geometry.cat.Motion;
-import com.cbg.core.geometry.cat.RigidBody;
-import com.cbg.core.geometry.cat.Triangle;
-import com.cbg.core.geometry.cat.VertexMorph;
+import com.cbg.studio.server.domain.geometry.Bone;
+import com.cbg.studio.server.domain.geometry.DisplayBoneGroupList;
+import com.cbg.studio.server.domain.geometry.Joint;
+import com.cbg.studio.server.domain.geometry.Material;
+import com.cbg.studio.server.domain.geometry.Motion;
+import com.cbg.studio.server.domain.geometry.RigidBody;
+import com.cbg.studio.server.domain.geometry.Triangle;
+import com.cbg.studio.server.domain.geometry.Vector;
+import com.cbg.studio.server.domain.geometry.VertexMorph;
 
 /**
  * @author Siebe
@@ -31,6 +33,33 @@ public class CATModel implements Serializable{
     private List<String> toonTextureList;
     private List<RigidBody> rigidBodyList;
     private List<Joint> jointList;
+    
+    @SuppressWarnings("all")
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        this.materials = (List<Material>)stream.readObject();
+        this.polygons = (List<Triangle>)stream.readObject();
+        this.bones = (List<Bone>)stream.readObject();
+        this.motions = (List<Motion>)stream.readObject();
+        this.vertexMorphList = (List<VertexMorph>)stream.readObject();
+        this.displayBoneGroups = (DisplayBoneGroupList)stream.readObject();
+        this.toonTextureList = (List<String>)stream.readObject();
+        this.rigidBodyList = (List<RigidBody>)stream.readObject();
+        this.jointList = (List<Joint>)stream.readObject();
+    }
+
+    private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(this.materials);
+        stream.writeObject(this.polygons);
+        stream.writeObject(this.bones);
+        stream.writeObject(this.vertexMorphList);
+        stream.writeObject(this.displayBoneGroups);
+        stream.writeObject(this.toonTextureList);
+        stream.writeObject(this.rigidBodyList);
+        stream.writeObject(this.jointList);
+    }
+    
     /**
      * @return the materials
      */

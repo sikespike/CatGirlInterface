@@ -1,9 +1,8 @@
-package com.cbg.core.geometry.cat;
+package com.cbg.studio.server.domain.geometry;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-import com.cbg.core.geometry.Vector;
 
 public class Material implements Serializable{
     private static final long serialVersionUID = 1L;

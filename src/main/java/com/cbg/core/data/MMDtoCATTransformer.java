@@ -7,20 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.cbg.core.data.cat.CATModel;
 import com.cbg.core.data.mmd.MMDModel;
-import com.cbg.core.geometry.Vector;
-import com.cbg.core.geometry.Vector2;
-import com.cbg.core.geometry.cat.Bone;
-import com.cbg.core.geometry.cat.DisplayBoneGroupList;
-import com.cbg.core.geometry.cat.Joint;
-import com.cbg.core.geometry.cat.Material;
-import com.cbg.core.geometry.cat.MorphData;
-import com.cbg.core.geometry.cat.Motion;
-import com.cbg.core.geometry.cat.RigidBody;
-import com.cbg.core.geometry.cat.Triangle;
-import com.cbg.core.geometry.cat.Vertex;
-import com.cbg.core.geometry.cat.VertexMorph;
 import com.cbg.core.geometry.mmd.MMDBone;
 import com.cbg.core.geometry.mmd.MMDIk;
 import com.cbg.core.geometry.mmd.MMDJoint;
@@ -30,6 +17,19 @@ import com.cbg.core.geometry.mmd.MMDRigidBody;
 import com.cbg.core.geometry.mmd.MMDTriangle;
 import com.cbg.core.geometry.mmd.MMDVertex;
 import com.cbg.core.geometry.mmd.MMDVertexMorph;
+import com.cbg.studio.server.domain.CATModel;
+import com.cbg.studio.server.domain.geometry.Bone;
+import com.cbg.studio.server.domain.geometry.DisplayBoneGroupList;
+import com.cbg.studio.server.domain.geometry.Joint;
+import com.cbg.studio.server.domain.geometry.Material;
+import com.cbg.studio.server.domain.geometry.MorphData;
+import com.cbg.studio.server.domain.geometry.Motion;
+import com.cbg.studio.server.domain.geometry.RigidBody;
+import com.cbg.studio.server.domain.geometry.Triangle;
+import com.cbg.studio.server.domain.geometry.Vector;
+import com.cbg.studio.server.domain.geometry.Vector2;
+import com.cbg.studio.server.domain.geometry.Vertex;
+import com.cbg.studio.server.domain.geometry.VertexMorph;
 
 /**
  * @author Siebe
@@ -150,8 +150,8 @@ public class MMDtoCATTransformer implements Runnable {
                 v.setUv(uv);
                 v.setBone0Weight(mmdv.getBone0Weight());
 
-                v.setBone0(boneList.get(mmdv.getBone0Index()));
-                v.setBone1(boneList.get(mmdv.getBone1Index()));
+                v.setBone0Name(boneList.get(mmdv.getBone0Index()).getName());
+                v.setBone1Name(boneList.get(mmdv.getBone1Index()).getName());
 
                 vertex.add(v);
             }
@@ -189,19 +189,19 @@ public class MMDtoCATTransformer implements Runnable {
             Bone b = boneList.get(x);
 
             int parentBoneIndex = mmdb.getParentBoneIndex();
-            Bone parentBone = parentBoneIndex != -1 ? boneList
-                    .get(parentBoneIndex) : null;
-            b.setParent(parentBone);
+            String parentBone = parentBoneIndex != -1 ? boneList
+                    .get(parentBoneIndex).getName() : null;
+            b.setParentName(parentBone);
 
             int childBoneIndex = mmdb.getChildBoneIndex();
-            Bone childBone = childBoneIndex != -1 ? boneList
-                    .get(childBoneIndex) : null;
-            b.setChild(childBone);
+            String childBone = childBoneIndex != -1 ? boneList
+                    .get(childBoneIndex).getName() : null;
+            b.setChildName(childBone);
 
             int targetBoneIndex = mmdb.getTargetBoneIndex();
-            Bone targetBone = targetBoneIndex != -1 ? boneList
-                    .get(targetBoneIndex) : null;
-            b.setTarget(targetBone);
+            String targetBone = targetBoneIndex != -1 ? boneList
+                    .get(targetBoneIndex).getName() : null;
+            b.setTargetName(targetBone);
         }
 
         System.out.println("complete");
@@ -217,19 +217,19 @@ public class MMDtoCATTransformer implements Runnable {
         for (MMDIk mmdik : ikList) {
             Motion m = new Motion();
 
-            m.setBone(boneList.get(mmdik.getBone().getIndex()));
-            m.setTargetBone(boneList.get(mmdik.getTargetBone().getIndex()));
+            m.setBoneName(boneList.get(mmdik.getBone().getIndex()).getName());
+            m.setTargetBoneName(boneList.get(mmdik.getTargetBone().getIndex()).getName());
             m.setLinks(mmdik.getNumLinks());
             m.setIteration(mmdik.getItCount());
             m.setMaxAngle(mmdik.getMaxAngle());
 
-            List<Bone> childBones = new ArrayList<Bone>();
+            List<String> childBones = new ArrayList<String>();
 
             for (MMDBone mmdb : mmdik.getChildBoneList()) {
-                childBones.add(boneList.get(mmdb.getIndex()));
+                childBones.add(boneList.get(mmdb.getIndex()).getName());
             }
 
-            m.setChildBones(childBones);
+            m.setChildBoneNames(childBones);
 
             motionList.add(m);
         }
@@ -248,10 +248,10 @@ public class MMDtoCATTransformer implements Runnable {
         for (String key : displayBoneGroups.keySet()) {
             List<MMDBone> mmdBones = displayBoneGroups.get(key);
 
-            List<Bone> bones = new ArrayList<Bone>();
+            List<String> bones = new ArrayList<String>();
 
             for (MMDBone mmdb : mmdBones) {
-                bones.add(boneList.get(mmdb.getIndex()));
+                bones.add(boneList.get(mmdb.getIndex()).getName());
             }
 
             groupList.put(key, bones);
@@ -278,7 +278,7 @@ public class MMDtoCATTransformer implements Runnable {
             RigidBody r = new RigidBody();
 
             r.setName(mmdr.getName());
-            r.setBone(boneList.get(mmdr.getBone().getIndex()));
+            r.setBoneName(boneList.get(mmdr.getBone().getIndex()).getName());
             r.setCollisionGroupId(mmdr.getCollisionGroupId());
             r.setCollisionMaskId(mmdr.getCollisionMaskId());
             r.setShape(types[mmdr.getShape()]);
@@ -313,10 +313,10 @@ public class MMDtoCATTransformer implements Runnable {
             Joint j = new Joint();
 
             j.setName(mmdj.getName());
-            j.setSourceRigidBody(rigidBodyList.get(mmdj.getSourceRigidBody()
-                    .getIndex()));
-            j.setDestRigidBody(rigidBodyList.get(mmdj.getDestRigidBody()
-                    .getIndex()));
+            j.setSourceRigidBodyName(rigidBodyList.get(mmdj.getSourceRigidBody()
+                    .getIndex()).getName());
+            j.setDestRigidBodyName(rigidBodyList.get(mmdj.getDestRigidBody()
+                    .getIndex()).getName());
             j.setLocation(mmdj.getLocation());
             j.setRotation(mmdj.getRotation());
             j.setMinLoc(mmdj.getMinLoc());

@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.cbg.studio.server.domain.CATModel;
+
 /**
  * @author Siebe
  *

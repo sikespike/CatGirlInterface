@@ -1,12 +1,11 @@
 /**
  * 
  */
-package com.cbg.core.geometry.cat;
+package com.cbg.studio.server.domain.geometry;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-import com.cbg.core.geometry.Vector;
 import com.cbg.core.util.StringUtil;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cbg.core.geometry;
+package com.cbg.studio.server.domain.geometry;
 
 import java.io.IOException;
 import java.io.Serializable;

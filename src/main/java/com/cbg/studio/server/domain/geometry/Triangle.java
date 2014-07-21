@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cbg.core.geometry.cat;
+package com.cbg.studio.server.domain.geometry;
 
 import java.io.Serializable;
 import java.util.List;

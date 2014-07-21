@@ -7,14 +7,15 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import com.cbg.core.geometry.cat.Bone;
-import com.cbg.core.geometry.cat.DisplayBoneGroupList;
-import com.cbg.core.geometry.cat.Joint;
-import com.cbg.core.geometry.cat.Material;
-import com.cbg.core.geometry.cat.Motion;
-import com.cbg.core.geometry.cat.RigidBody;
-import com.cbg.core.geometry.cat.Triangle;
-import com.cbg.core.geometry.cat.VertexMorph;
+import com.cbg.studio.server.domain.CATModel;
+import com.cbg.studio.server.domain.geometry.Bone;
+import com.cbg.studio.server.domain.geometry.DisplayBoneGroupList;
+import com.cbg.studio.server.domain.geometry.Joint;
+import com.cbg.studio.server.domain.geometry.Material;
+import com.cbg.studio.server.domain.geometry.Motion;
+import com.cbg.studio.server.domain.geometry.RigidBody;
+import com.cbg.studio.server.domain.geometry.Triangle;
+import com.cbg.studio.server.domain.geometry.VertexMorph;
 
 /**
  * @author Siebe
@@ -31,7 +32,9 @@ public class CATModelBinaryWriter {
     }
 
     public void writeModel() throws Exception {
-        writeMaterials();
+        this.out.writeObject(model);
+        
+        /*writeMaterials();
 
         writePolygons();
 
@@ -47,7 +50,7 @@ public class CATModelBinaryWriter {
 
         writeRigidBodyList();
 
-        writeJointList();
+        writeJointList();*/
 
     }
 

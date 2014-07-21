@@ -7,9 +7,9 @@ import org.junit.Assert;
 
 import org.junit.Test;
 
-import com.cbg.core.data.cat.CATModel;
 import com.cbg.core.data.mmd.MMDImporter;
 import com.cbg.core.data.mmd.MMDModel;
+import com.cbg.studio.server.domain.CATModel;
 
 /**
  * @author Siebe

@@ -3,7 +3,7 @@
  */
 package com.cbg.core.geometry.mmd;
 
-import com.cbg.core.geometry.Vector;
+import com.cbg.studio.server.domain.geometry.Vector;
 
 /**
  * @author Siebe

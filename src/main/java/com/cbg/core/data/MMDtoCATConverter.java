@@ -4,9 +4,9 @@
 package com.cbg.core.data;
 
 import com.cbg.core.data.cat.CATExporter;
-import com.cbg.core.data.cat.CATModel;
 import com.cbg.core.data.mmd.MMDImporter;
 import com.cbg.core.data.mmd.MMDModel;
+import com.cbg.studio.server.domain.CATModel;
 
 /**
  * @author Siebe

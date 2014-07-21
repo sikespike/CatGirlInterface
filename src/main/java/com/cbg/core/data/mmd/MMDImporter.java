@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.cbg.core.geometry.Vector;
 import com.cbg.core.geometry.mmd.MMDBone;
 import com.cbg.core.geometry.mmd.MMDIk;
 import com.cbg.core.geometry.mmd.MMDJoint;
@@ -21,6 +20,7 @@ import com.cbg.core.geometry.mmd.MMDRigidBody;
 import com.cbg.core.geometry.mmd.MMDTriangle;
 import com.cbg.core.geometry.mmd.MMDVertex;
 import com.cbg.core.geometry.mmd.MMDVertexMorph;
+import com.cbg.studio.server.domain.geometry.Vector;
 
 /**
  * @author Siebe
